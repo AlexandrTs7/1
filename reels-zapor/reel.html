@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Reels — гастроколический рефлекс</title>
+<style>
+@font-face{font-family:Play;font-style:normal;font-weight:500;src:url(fonts/playfair-display-cyrillic-500-normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Play;font-style:normal;font-weight:500;src:url(fonts/playfair-display-latin-500-normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2190-2193,U+20AC,U+2122,U+2212}
+@font-face{font-family:Play;font-style:italic;font-weight:500;src:url(fonts/playfair-display-cyrillic-500-italic.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Play;font-style:italic;font-weight:500;src:url(fonts/playfair-display-latin-500-italic.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2190-2193,U+20AC,U+2122,U+2212}
+@font-face{font-family:Play;font-style:italic;font-weight:400;src:url(fonts/playfair-display-cyrillic-400-italic.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Play;font-style:italic;font-weight:400;src:url(fonts/playfair-display-latin-400-italic.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2190-2193,U+20AC,U+2122,U+2212}
+@font-face{font-family:Mont;font-style:normal;font-weight:400;src:url(fonts/montserrat-cyrillic-400-normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Mont;font-style:normal;font-weight:400;src:url(fonts/montserrat-latin-400-normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2190-2193,U+20AC,U+2122,U+2212}
+@font-face{font-family:Mont;font-style:normal;font-weight:500;src:url(fonts/montserrat-cyrillic-500-normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Mont;font-style:normal;font-weight:500;src:url(fonts/montserrat-latin-500-normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2190-2193,U+20AC,U+2122,U+2212}
+@font-face{font-family:Mont;font-style:normal;font-weight:600;src:url(fonts/montserrat-cyrillic-600-normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:Mont;font-style:normal;font-weight:600;src:url(fonts/montserrat-latin-600-normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2190-2193,U+20AC,U+2122,U+2212}
+:root{--sage:#E2EADF;--cream:#F6F2E9;--ink:#1E3326;--green:#3F6B3A;--olive:#7A9447;--muted:#5E6E62;--warm:#C9762E}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--sage)}
+body{font-family:Mont,sans-serif;color:var(--ink)}
+.scene{position:absolute;inset:0;padding:0 96px;opacity:0}
+.sage{background:var(--sage)}.cream{background:var(--cream)}
+.a{position:absolute;left:96px;right:120px;opacity:0;will-change:transform,opacity}
+.tag{display:inline-block;font:600 26px Mont;letter-spacing:.22em;text-transform:uppercase;color:var(--green);border:2px solid var(--green);border-radius:40px;padding:12px 28px}
+.label{font:500 26px Mont;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.h1{font:500 92px/1.08 Mont;letter-spacing:-.01em}
+.h2{font:500 74px/1.12 Mont}
+.it{font:italic 500 1.08em/1.05 Play;color:var(--green)}
+.serif{font:500 84px/1.12 Play}
+.body{font:400 44px/1.4 Mont;color:var(--muted)}
+.stroke{fill:none;stroke:var(--green);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.brush{fill:none;stroke:var(--olive);stroke-width:7;stroke-linecap:round}
+.chip{display:inline-block;font:500 42px Mont;background:rgba(255,255,255,.65);border-radius:60px;padding:22px 40px;margin-bottom:22px}
+.flow{font:500 48px/1.3 Mont}
+.flow .arr{color:var(--olive);font-family:Play}
+.sign{display:flex;align-items:center;gap:30px;font:500 50px/1.25 Mont}
+.dot{flex:none;width:22px;height:22px;border-radius:50%;background:var(--olive)}
+.num{font:italic 400 210px/1 Play;color:var(--olive);opacity:.9}
+.tiptitle{font:500 76px/1.1 Mont}
+.dots{display:flex;gap:16px}.dots i{width:14px;height:14px;border-radius:50%;background:var(--green);opacity:.22}
+.dots i.on{opacity:1}
+.frame{border:2px solid var(--green);border-radius:36px;padding:70px 64px}
+#sub{position:absolute;left:96px;right:150px;top:1500px;font:500 34px/1.38 Mont;color:var(--ink);opacity:.82;text-align:left;min-height:100px}
+#handle{position:absolute;left:96px;top:200px;font:500 26px Mont;letter-spacing:.12em;color:var(--muted);opacity:.85}
+.leaf{position:absolute;right:-60px;top:250px;width:420px;opacity:.10}
+</style>
+</head>
+<body>
+
+<!-- S1 HOOK -->
+<section class="scene sage" data-scene="1">
+  <svg class="leaf" viewBox="0 0 100 100"><path class="stroke" d="M15 85 C15 40 48 15 88 12 C86 52 60 85 15 85 Z M15 85 L70 30"/></svg>
+  <div class="a" data-in="L1-0.2" style="top:470px"><span class="tag">здоровье кишечника</span></div>
+  <div class="a h1" data-in="L1" style="top:620px">Замечали,<br>что после еды<br><span class="it">тянет в туалет?</span></div>
+  <div class="a serif" data-in="L2" style="top:1080px;font-size:66px;color:var(--ink)">Это не случайность.</div>
+  <svg class="a" data-in="L2" style="top:1170px;width:560px;height:40px" viewBox="0 0 560 40"><path class="brush" data-draw="L2+0.2" d="M6 28 C150 8 330 6 552 16"/></svg>
+</section>
+
+<!-- S2 REFLEX -->
+<section class="scene cream" data-scene="2">
+  <div class="a label" data-in="L3-0.1" style="top:330px">как это работает</div>
+  <div class="a h2" data-in="L3" style="top:400px;font-size:64px">Еда попала в желудок —<br>кишечник получает<br><span class="it">сигнал</span></div>
+  <svg class="a" data-in="L3+0.3" style="top:720px;left:60px;right:60px;height:330px" viewBox="0 0 960 330">
+    <g transform="translate(40,40)"><path class="stroke" data-draw="L3+0.3" d="M15 105 L225 105 C225 190 175 235 120 235 C65 235 15 190 15 105 Z"/><path class="stroke" data-draw="L3+0.6" d="M95 80 q-14 -18 0 -36 M125 80 q-14 -18 0 -36 M155 80 q-14 -18 0 -36"/></g>
+    <g transform="translate(375,30)"><path class="stroke" data-draw="L3+1.2" d="M95 10 C95 50 55 60 55 120 C55 190 110 240 165 220 C205 205 210 160 180 150 C150 140 140 170 125 150 C110 130 125 70 125 10"/></g>
+    <g transform="translate(690,40)"><path class="stroke" data-draw="L3+2.0" d="M20 250 L20 45 Q20 25 40 25 L200 25 Q220 25 220 45 L220 230 Q220 250 200 250 L160 250"/><path class="stroke" data-draw="L3+2.4" d="M55 95 q32 -26 65 0 t65 0 M55 165 q32 -26 65 0 t65 0"/></g>
+    <path id="sig" class="stroke" style="stroke-dasharray:4 14;opacity:.6" data-draw="L3+2.6" d="M285 160 L360 160 M600 160 L690 160"/>
+    <circle id="pulse" r="12" fill="var(--warm)" opacity="0"/>
+  </svg>
+  <div class="a" data-in="L4" style="top:1090px"><div class="label" style="margin-bottom:18px">это называется</div><div class="serif" style="font-size:78px"><span class="it" style="font-size:1em">гастроколический рефлекс</span></div></div>
+  <div class="a body" data-in="L5" style="top:1360px;display:flex;gap:22px;align-items:center;color:var(--ink)"><svg viewBox="0 0 100 100" style="width:62px;flex:none"><circle class="stroke" cx="50" cy="50" r="18"/><path class="stroke" d="M50 14 v-10 M50 96 v-10 M14 50 h-10 M96 50 h-10 M24 24 l-7 -7 M76 76 l7 7 M76 24 l7 -7 M24 76 l-7 7"/></svg><span>сильнее всего — после завтрака</span></div>
+</section>
+
+<!-- S3 IGNORE -->
+<section class="scene sage" data-scene="3">
+  <div class="a h2" data-in="L6" data-out="L9-0.4" style="top:330px">А мы этот сигнал<br><span class="it">игнорируем</span></div>
+  <div class="a" data-in="L7" data-out="L8-0.3" style="top:640px"><div class="chip">спешим утром</div></div>
+  <div class="a" data-in="L7+1.1" data-out="L8-0.3" style="top:760px"><div class="chip">в офисе неудобно</div></div>
+  <div class="a" data-in="L7+2.2" data-out="L8-0.3" style="top:880px"><div class="chip">«потерплю до дома»</div></div>
+  <div class="a flow" data-in="L8" data-out="L9-0.4" style="top:640px">рефлекс слабеет<br><span class="arr">↓</span><br>стул задерживается<br><span class="arr">↓</span><br>становится твёрже</div>
+  <div class="a serif" data-in="L9" style="top:700px;font-size:104px;line-height:1.1">Так<br>начинается<br><span class="it" style="font-size:1em">запор</span></div>
+  <svg class="a" data-in="L9" style="top:1070px;width:420px;height:40px" viewBox="0 0 420 40"><path class="brush" data-draw="L9+0.2" d="M6 26 C120 8 260 6 412 16"/></svg>
+</section>
+
+<!-- S4 SIGNS -->
+<section class="scene cream" data-scene="4">
+  <div class="a label" data-in="L10-0.1" style="top:330px">кстати</div>
+  <div class="a h2" data-in="L10" style="top:410px">Запор — это<br>не только <span class="it">«редко»</span></div>
+  <div class="a sign" data-in="L11" style="top:800px"><span class="dot"></span>приходится тужиться</div>
+  <div class="a sign" data-in="L11+1.6" style="top:930px"><span class="dot"></span>твёрдый стул</div>
+  <div class="a sign" data-in="L11+3.0" style="top:1060px"><span class="dot"></span>ощущение, что опустел<br>«не до конца»</div>
+</section>
+
+<!-- S5-9 TIPS -->
+<section class="scene sage" data-scene="5" data-until="9">
+  <div class="a serif" data-in="L12" style="top:300px;font-size:64px"><span class="it" style="font-size:1em">Что помогает</span></div>
+  <div class="a dots" data-in="L12" style="top:410px" id="dots"><i></i><i></i><i></i><i></i><i></i></div>
+  <!-- tip 1 -->
+  <div class="a" data-in="L13-0.2" data-out="L14-0.6" style="top:560px"><div class="num">01</div>
+    <svg viewBox="0 0 100 100" style="position:absolute;right:0;top:0;width:260px"><path class="stroke" d="M28 32 L72 32 L66 90 L34 90 Z M31 52 L69 52 M44 24 q-5 -6 0 -12 M56 24 q-5 -6 0 -12"/></svg>
+    <div class="tiptitle" style="margin-top:80px">Тёплая вода<br>утром</div><div class="body" style="margin-top:24px">и спокойный завтрак</div></div>
+  <!-- tip 2 -->
+  <div class="a" data-in="L14-0.3" data-out="L15-0.6" style="top:560px"><div class="num">02</div>
+    <svg viewBox="0 0 100 100" style="position:absolute;right:0;top:0;width:260px"><circle class="stroke" cx="50" cy="55" r="33"/><path class="stroke" d="M50 55 L50 34 M50 55 L64 63 M42 14 L58 14 M50 14 L50 22"/></svg>
+    <div class="tiptitle" style="margin-top:80px">Не подавлять<br>позыв</div><div class="body" style="margin-top:24px">10 минут — без спешки<br>и телефона</div></div>
+  <!-- tip 3 -->
+  <div class="a" data-in="L15-0.3" data-out="L16-0.6" style="top:560px"><div class="num">03</div>
+    <svg viewBox="0 0 100 100" style="position:absolute;right:0;top:0;width:260px"><path class="stroke" d="M18 84 C18 44 48 18 84 16 C82 52 58 84 18 84 Z M18 84 L66 36"/></svg>
+    <div class="tiptitle" style="margin-top:80px">Клетчатка</div><div class="body" style="margin-top:24px">овощи, зелень, крупы,<br>льняное семя</div></div>
+  <!-- tip 4 -->
+  <div class="a" data-in="L16-0.3" data-out="L17-0.6" style="top:560px"><div class="num">04</div>
+    <svg viewBox="0 0 100 100" style="position:absolute;right:0;top:0;width:260px"><path class="stroke" d="M50 12 C50 12 24 44 24 62 A26 26 0 0 0 76 62 C76 44 50 12 50 12 Z M38 64 q4 10 14 12"/></svg>
+    <div class="tiptitle" style="margin-top:80px">Вода<br>и движение</div><div class="body" style="margin-top:24px">в течение всего дня</div></div>
+  <!-- tip 5 -->
+  <div class="a" data-in="L17-0.3" style="top:560px"><div class="num">05</div>
+    <svg viewBox="0 0 100 100" style="position:absolute;right:0;top:0;width:260px"><rect class="stroke" x="16" y="36" width="68" height="12" rx="6"/><path class="stroke" d="M28 48 L22 84 M72 48 L78 84 M25 68 L75 68"/></svg>
+    <div class="tiptitle" style="margin-top:80px">Подставка<br>под ноги</div><div class="body" style="margin-top:24px">в такой позе<br>кишечнику легче</div></div>
+</section>
+
+<!-- S10 DOCTOR -->
+<section class="scene cream" data-scene="10">
+  <div class="a" data-in="L18-0.1" style="top:520px"><div class="frame">
+    <div class="label" style="color:var(--warm);margin-bottom:34px">важно</div>
+    <div class="h2" style="font-size:62px">Запор неделями,<br>боль или кровь —</div>
+    <div class="serif" style="font-size:72px;margin-top:20px"><span class="it" style="font-size:1em">не терпите,<br>идите к врачу</span></div>
+  </div></div>
+</section>
+
+<!-- S11 CTA -->
+<section class="scene sage" data-scene="11">
+  <svg class="leaf" viewBox="0 0 100 100"><path class="stroke" d="M15 85 C15 40 48 15 88 12 C86 52 60 85 15 85 Z M15 85 L70 30"/></svg>
+  <svg class="a" data-in="L19-0.2" style="top:380px;width:130px" viewBox="0 0 100 100"><path class="stroke" data-draw="L19" d="M28 10 L72 10 L72 90 L50 72 L28 90 Z"/></svg>
+  <div class="a serif" data-in="L19" style="top:560px;font-size:96px">Сохраните,<br><span class="it" style="font-size:1em">чтобы не забыть</span></div>
+  <div class="a" data-in="L20" style="top:900px"><div class="label" style="margin-bottom:22px">в следующем видео</div><div class="body" style="color:var(--ink);font-size:48px">продукты, которые мягко<br>запускают кишечник</div></div>
+  <div class="a" data-in="L20+1.5" style="top:1180px;font:500 40px Mont;color:var(--green);letter-spacing:.04em">@madinanhc</div>
+</section>
+
+<div id="handle">MADINANHC · INTEGRATIVE NUTRITION</div>
+<div id="sub"></div>
+
+<script>
+const TL = window.__TL__;
+const L = TL.lines;
+const SCENE_PAD = 0.35, FADE = 0.45;
+function tok(s){ // "L3+0.5" -> seconds
+  const m = s.match(/^L(\d+)([+-][\d.]+)?$/); return L[+m[1]-1].start + (m[2]?parseFloat(m[2]):0);
+}
+const ease = x => x<=0?0:x>=1?1:1-Math.pow(1-x,3);
+const clamp = x => Math.max(0,Math.min(1,x));
+// scene ranges
+const scenes = [...document.querySelectorAll('.scene')].map(el=>{
+  const n=+el.dataset.scene, until=+(el.dataset.until||n);
+  const first=L.find(l=>l.scene===n);
+  const next=L.find(l=>l.scene===until+1);
+  return {el, start: n===1?0:first.start-SCENE_PAD, end: next?next.start-SCENE_PAD:TL.total+1};
+});
+const items=[...document.querySelectorAll('[data-in]')].map(el=>({el,tin:tok(el.dataset.in),tout:el.dataset.out?tok(el.dataset.out):null}));
+const draws=[...document.querySelectorAll('[data-draw]')].map(el=>{const len=el.getTotalLength();el.style.strokeDasharray=el.id==='sig'?'':len;return {el,len,t:tok(el.dataset.draw)}});
+const pulse=document.getElementById('pulse');
+const sub=document.getElementById('sub');
+function render(t){
+  for(const s of scenes){
+    const a=clamp((t-s.start)/FADE), b=clamp((t-s.end)/FADE);
+    s.el.style.opacity = s.start===0 && t<0.01 ? 1 : (ease(a)*(1-ease(b))).toFixed(3);
+    if(s.start===0) s.el.style.opacity = (1-ease(b)).toFixed(3);
+  }
+  for(const it of items){
+    const p=ease(clamp((t-it.tin)/0.7)); const q=it.tout!=null?ease(clamp((t-it.tout)/0.45)):0;
+    it.el.style.opacity=(p*(1-q)).toFixed(3);
+    it.el.style.transform=`translateY(${((1-p)*34 - q*20).toFixed(1)}px)`;
+  }
+  for(const d of draws){
+    if(d.el.id==='sig'){ d.el.style.opacity=(0.6*ease(clamp((t-d.t)/0.6))).toFixed(2); continue; }
+    const p=ease(clamp((t-d.t)/1.1)); d.el.style.strokeDashoffset=(d.len*(1-p)).toFixed(1);
+  }
+  // signal pulse travelling bowl -> stomach -> intestine, looping
+  const t0=tok('L3+2.8');
+  if(t>t0 && t<tok('L6')-0.3){
+    const ph=((t-t0)%2.4)/2.4; let x;
+    x = ph<0.5 ? 285+(360-285)*(ph/0.5) : 600+(690-600)*((ph-0.5)/0.5);
+    pulse.setAttribute('cx',x); pulse.setAttribute('cy',160);
+    pulse.setAttribute('opacity',(Math.sin(Math.PI*((ph%0.5)/0.5))).toFixed(2));
+  } else pulse.setAttribute('opacity',0);
+  // tips progress dots
+  const tipStarts=[13,14,15,16,17].map(i=>L[i-1].start-0.3);
+  const k=tipStarts.filter(s=>t>=s).length;
+  document.querySelectorAll('#dots i').forEach((d,i)=>d.classList.toggle('on',i<k));
+  // subtitles
+  const cur=L.find(l=>t>=l.start-0.08 && t<=l.end+0.25);
+  const txt=cur?cur.text:'';
+  if(sub.textContent!==txt) sub.textContent=txt;
+  sub.style.opacity=cur?0.82:0;
+}
+window.render=render;
+render(0);
+</script>
+</body>
+</html>
