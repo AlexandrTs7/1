@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Куда уходит Ваша энергия</title>
+<meta name="description" content="Тест из 28 утверждений: 3 минуты, и Вы увидите, через что утекает Ваша энергия: тело, эмоции, внимание или смысл.">
+<meta property="og:title" content="Куда уходит Ваша энергия · тест">
+<meta property="og:description" content="28 утверждений, 3 минуты. Покажет, где у Вас главная утечка энергии и с чего начать.">
+<meta name="theme-color" content="#0B0C0D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@500;700;800&family=PT+Serif:ital@1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0C0D; --panel:#16181A; --text:#F3EEE6; --muted:rgba(243,238,230,.62);
+  --line:rgba(243,238,230,.38); --line2:rgba(243,238,230,.14);
+  --copper:#D9A066; --sage:#9DB89A; --rust:#D0654A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text)}
+body{font-family:Manrope,system-ui,sans-serif;font-weight:500;line-height:1.42;min-height:100vh;min-height:100dvh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto;padding:28px 20px 40px;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.label{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.label b{color:var(--copper);font-weight:500}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.scale{display:flex;gap:3px;margin:14px 0 0;align-items:flex-end}
+.scale i{flex:1;height:9px;background:var(--line2);border-radius:1px;transition:background .25s}
+.scale i.q{height:14px}
+.scale i.on{background:var(--text)}
+.scale i.now{background:var(--copper)}
+h1{font-weight:800;font-size:clamp(36px,10vw,52px);line-height:1.04;letter-spacing:-1px;margin:44px 0 18px}
+h1 em,h2 em{font-style:normal;color:var(--copper)}
+h2{font-weight:800;font-size:clamp(26px,7vw,34px);line-height:1.1;letter-spacing:-.5px}
+p.lead{font-size:18px;color:var(--muted);max-width:34ch}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);margin:32px 0}
+.facts>div{padding:16px 4px}
+.facts>div+div{border-left:1px solid var(--line2);padding-left:14px}
+.num{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:30px;line-height:1}
+.facts .label{font-size:10.5px;margin-top:8px;letter-spacing:.12em}
+.quote{font-family:"PT Serif",serif;font-style:italic;font-size:17px;color:var(--muted);border-left:2px solid var(--copper);padding:2px 0 2px 14px;margin-bottom:28px}
+.grow{flex:1}
+.btn{display:block;width:100%;border:0;border-radius:16px;padding:19px 20px;font:700 17px Manrope,sans-serif;cursor:pointer;text-align:center;text-decoration:none;transition:transform .08s,background .2s}
+.btn:active{transform:scale(.985)}
+.btn.main{background:var(--copper);color:#0B0C0D}
+.btn.ghost{background:transparent;color:var(--text);border:1.5px solid var(--line)}
+.btn+.btn{margin-top:10px}
+.small{font-size:13px;color:var(--muted);text-align:center;margin-top:14px}
+/* question */
+.cat{margin:40px 0 0}
+.stmt{font-weight:700;font-size:clamp(22px,6.2vw,28px);line-height:1.25;letter-spacing:-.3px;margin:18px 0 0;min-height:7.5em}
+.hint{font-size:14px;color:var(--muted);margin:10px 0 24px}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.answers .btn{margin:0;padding:22px 10px}
+.answers .yes{background:var(--panel);color:var(--text);border:1.5px solid var(--copper)}
+.answers .no{background:var(--panel);color:var(--text);border:1.5px solid var(--line2)}
+.back{background:none;border:0;color:var(--muted);font:500 14px Manrope,sans-serif;cursor:pointer;padding:6px 0}
+.back:disabled{visibility:hidden}
+.fade{animation:fade .28s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* result */
+.total{display:flex;align-items:baseline;gap:10px;margin:36px 0 6px}
+.total .big{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:84px;line-height:1;color:var(--copper)}
+.total .of{font-family:"JetBrains Mono",monospace;font-size:22px;color:var(--muted)}
+.level{font-weight:800;font-size:22px;margin:6px 0 10px}
+.text{font-size:16.5px;color:var(--text)}
+.text.m{color:var(--muted)}
+.card{background:var(--panel);border-radius:24px;padding:22px 20px;margin:26px 0 0}
+.bars{margin-top:16px}
+.bar{display:grid;grid-template-columns:1fr auto;gap:6px 10px;margin-top:16px}
+.bar .name{font-weight:700;font-size:15px}
+.bar .val{font-family:"JetBrains Mono",monospace;font-size:14px;color:var(--muted)}
+.bar .track{grid-column:1/-1;display:flex;gap:4px}
+.bar .track i{flex:1;height:10px;border-radius:2px;background:var(--line2)}
+.bar .track i.on{background:var(--text)}
+.bar.top .name{color:var(--copper)}
+.bar.top .track i.on{background:var(--copper)}
+ol.steps{list-style:none;counter-reset:s;margin-top:14px}
+ol.steps li{counter-increment:s;position:relative;padding:12px 0 12px 40px;border-top:1px solid var(--line2);font-size:16px}
+ol.steps li:first-child{border-top:0}
+ol.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:13px;font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--copper);font-size:14px}
+.leaks{margin-top:12px}
+.leaks li{list-style:none;font-size:15px;color:var(--muted);padding:8px 0 8px 18px;position:relative}
+.leaks li::before{content:"";position:absolute;left:0;top:16px;width:8px;height:2px;background:var(--rust)}
+.cta{margin-top:30px}
+.sign{font-family:"PT Serif",serif;font-style:italic;color:var(--muted);margin:30px 0 22px;font-size:16px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+
+<script>
+/* ===== Настройки: ссылки для кнопок в конце ===== */
+const LINKS = {
+  telegram: "https://t.me/atsyrulnikov",      // Телеграм-канал (запасной вариант, пока нет бота)
+  tgBot: "",                                   // имя Telegram-бота без @, например "atsyrulnikov_bot". Когда появится, кнопка поведёт в бота с результатом и источником
+  instagram: "https://instagram.com/atsyrulnikov"
+};
+const RETEST_DAYS = 84; // повторный замер через 12 недель
+
+/* Источник: ссылка вида .../energiya/?src=reels-energiya. Сохраняем, чтобы знать, откуда пришёл человек */
+const SRC = (() => {
+  let s = "";
+  try { s = new URLSearchParams(location.search).get("src") || ""; } catch(e){}
+  s = s.toLowerCase().replace(/[^a-z0-9-]/g,"").slice(0,24);
+  return s || "direct";
+})();
+
+const CATS = {
+  phys: {
+    name: "Тело", full: "Физическая энергия",
+    leak: "Главная утечка у Вас через тело",
+    why: "Когда телу не хватает сна, движения и нормальной еды, никакая мотивация не работает. Силы заканчиваются к обеду, а вечер уходит на то, чтобы прийти в себя.",
+    steps: [
+      "Ложитесь и вставайте в одно и то же время всю следующую неделю, даже в выходные.",
+      "Каждые 90 минут работы делайте перерыв на 5–10 минут: встать, пройтись, выпить воды.",
+      "Запланируйте в календаре 3 тренировки или прогулки на неделю, как встречи, которые нельзя перенести."
+    ]
+  },
+  emo: {
+    name: "Эмоции", full: "Эмоциональная энергия",
+    leak: "Главная утечка у Вас через эмоции",
+    why: "Раздражение, тревога и нехватка радости съедают силы незаметно. Вроде ничего тяжёлого не делали, а к вечеру пусто.",
+    steps: [
+      "Каждый день делайте одно дело только для радости. Хотя бы 20 минут, без пользы и без чувства вины.",
+      "Вечером запишите 3 маленькие победы за день. Это перестраивает внимание с того, что не получилось.",
+      "Раз в день скажите одному человеку конкретное «спасибо»: за что именно."
+    ]
+  },
+  ment: {
+    name: "Внимание", full: "Ментальная энергия",
+    leak: "Главная утечка у Вас через внимание",
+    why: "Уведомления, переключения и список дел без приоритетов дробят день на кусочки. Вы заняты всё время, а главное так и стоит на месте.",
+    steps: [
+      "Утром выберите одну главную задачу дня и сделайте её первой, до мессенджеров.",
+      "На время главной задачи выключите уведомления и уберите телефон из поля зрения.",
+      "Раз в неделю выделяйте час на разбор недели: что сделано, что нет, что на следующей."
+    ]
+  },
+  spir: {
+    name: "Смысл", full: "Духовная энергия",
+    leak: "Главная утечка у Вас через смысл",
+    why: "Когда жизнь «управляет Вами», а время уходит на чужие задачи, силы тратятся без ощущения, что это Ваше. Это самая тихая и самая дорогая утечка.",
+    steps: [
+      "Запишите 3 свои главные ценности и сверьте с ними прошлую неделю: куда на самом деле ушло время.",
+      "Поставьте в календарь 1 час в день на себя, как встречу, которую нельзя перенести.",
+      "Ответьте письменно на вопрос: что я хочу, чтобы обязательно случилось в моей жизни в этом году?"
+    ]
+  }
+};
+
+const Q = [
+  ["phys","Мне тяжело вставать утром, и нужно время на «раскачку», даже если я выспался(-ась)."],
+  ["phys","Я часто пропускаю приёмы пищи и в целом питаюсь несбалансированно."],
+  ["phys","Я редко делаю зарядку или разминку и провожу большую часть дня сидя."],
+  ["phys","У меня есть одна или несколько вредных привычек: много сладкого или жирного, алкоголь, курение."],
+  ["phys","Я не хожу регулярно в спортзал, не делаю кардио или силовых тренировок."],
+  ["phys","В течение рабочего дня у меня почти нет возможности сделать перерыв и восстановиться."],
+  ["phys","К вечеру у меня нет сил ни на семью, ни на себя: только лечь и листать телефон."],
+  ["emo","Я часто раздражаюсь или беспокоюсь на работе, особенно когда задача ответственная или нужен быстрый результат."],
+  ["emo","Мне не хватает позитивных эмоций, и я не знаю, где их взять."],
+  ["emo","Я расстраиваюсь или злюсь, если не получаю быстрых результатов в работе или жизни."],
+  ["emo","Я редко нахожу время, чтобы выразить благодарность людям вокруг."],
+  ["emo","Я откладываю неприятные решения и разговоры, и они неделями висят на мне."],
+  ["emo","Я редко уделяю время любимым занятиям, которые дарят мне радость."],
+  ["emo","Мне сложно поверить в себя, собраться и продолжать действовать, когда трудно."],
+  ["ment","У меня не получается выделять в течение дня время на короткий отдых и «перезагрузку»."],
+  ["ment","Во время важного дела я часто отвлекаюсь, особенно на уведомления и почту."],
+  ["ment","Мне сложно выделить из списка дел то, что важно сейчас, и держать на этом фокус."],
+  ["ment","Мне трудно полностью расслабиться и успокоиться после тяжёлого рабочего дня."],
+  ["ment","Я мало размышляю о своей жизни и редко её планирую."],
+  ["ment","Я делаю много задач, которые мог(ла) бы отдать сотрудникам или подрядчикам."],
+  ["ment","Я редко трачу время на развлечения и не умею весело отдыхать."],
+  ["spir","Я не чувствую, что делаю что-то важное и вношу вклад в хорошие перемены вокруг."],
+  ["spir","Я не очень понимаю свою настоящую цель и не чувствую причастности к чему-то большему."],
+  ["spir","На мои решения часто влияют внешние требования. Жизнь чаще управляет мной, чем я ей."],
+  ["spir","Я замечаю расхождение между своими ценностями и тем, куда на самом деле уходят моё время, внимание и силы."],
+  ["spir","Мне сложно самостоятельно расставлять приоритеты и делать то, во что я верю."],
+  ["spir","Мне сложно найти в своём графике время только для себя."],
+  ["spir","Я не могу ясно сказать, чего хочу от следующего года."]
+];
+
+const N = Q.length;
+let answers = [];
+let idx = 0;
+const app = document.getElementById("app");
+/* История замеров на этом устройстве: [{d: дата, a: ответы, src}] */
+const store = {
+  all(){ try{ const v = JSON.parse(localStorage.getItem("energy-test-v2")||"[]"); return Array.isArray(v)?v:[]; }catch(e){ return []; } },
+  add(a){ try{ const h = store.all(); h.push({d: Date.now(), a, src: SRC}); localStorage.setItem("energy-test-v2", JSON.stringify(h.slice(-12))); }catch(e){} }
+};
+function sumsOf(a){
+  const s = {phys:0,emo:0,ment:0,spir:0};
+  a.forEach((v,i)=>{ if(v) s[Q[i][0]]++; });
+  return s;
+}
+function fmtDate(t){ try{ return new Date(t).toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"}); }catch(e){ return ""; } }
+
+function scale(done){
+  let s = '<div class="scale" aria-hidden="true">';
+  for(let i=0;i<N;i++){
+    const q = (i%7===0) ? ' q' : '';
+    const c = i<done ? ' on' : (i===done ? ' now' : '');
+    s += `<i class="${q}${c}"></i>`;
+  }
+  return s + '</div>';
+}
+
+function intro(){
+  app.innerHTML = `
+  <div class="fade">
+    <div class="top"><span class="label">Кайдзен · <b>Энергия</b></span><span class="label">Тест</span></div>
+    ${scale(-1)}
+    <h1>Куда уходит Ваша <em>энергия</em></h1>
+    <p class="lead">Дела наваливаются, важное откладывается, к вечеру пусто. Чаще всего дело не в дисциплине, а в том, куда утекает энергия. Тест покажет, где именно.</p>
+    <div class="facts">
+      <div><div class="num">28</div><div class="label">вопросов</div></div>
+      <div><div class="num">3</div><div class="label">минуты</div></div>
+      <div><div class="num">4</div><div class="label">вида энергии</div></div>
+    </div>
+    <p class="quote">Время у всех одинаковое. Разница в том, сколько в нём энергии.</p>
+    <p class="text m" style="font-size:15px">Отвечайте честно, как есть сегодня, а не как хотелось бы. Результат станет Вашей точкой отсчёта: через 12 недель пройдите тест ещё раз и сравните.</p>
+  </div>
+  <div class="grow"></div>
+  <button class="btn main" id="start">Начать тест</button>
+  <p class="small">Ответы никуда не отправляются и видны только Вам.</p>`;
+  document.getElementById("start").onclick = () => { answers = []; idx = 0; question(); };
+}
+
+function question(){
+  const [cat, text] = Q[idx];
+  app.innerHTML = `
+  <div class="top"><button class="back" id="back" ${idx===0?'disabled':''}>← Назад</button><span class="label"><b>${String(idx+1).padStart(2,"0")}</b> / ${N}</span></div>
+  ${scale(idx)}
+  <div class="fade">
+    <div class="label cat">${CATS[cat].full}</div>
+    <div class="stmt">${text}</div>
+    <p class="hint">Это про Вас?</p>
+  </div>
+  <div class="grow"></div>
+  <div class="answers">
+    <button class="btn yes" data-v="1">Да, про меня</button>
+    <button class="btn no" data-v="0">Нет</button>
+  </div>`;
+  app.querySelectorAll(".answers .btn").forEach(b => b.onclick = () => {
+    answers[idx] = +b.dataset.v;
+    idx++;
+    if(idx>=N){ store.add(answers.slice()); result(); } else question();
+  });
+  document.getElementById("back").onclick = () => { if(idx>0){ idx--; question(); } };
+  window.scrollTo(0,0);
+}
+
+function result(){
+  const sums = {phys:0,emo:0,ment:0,spir:0};
+  const yesTexts = {phys:[],emo:[],ment:[],spir:[]};
+  answers.forEach((v,i)=>{ if(v){ sums[Q[i][0]]++; yesTexts[Q[i][0]].push(Q[i][1]); } });
+  const total = Object.values(sums).reduce((a,b)=>a+b,0);
+  const max = Math.max(...Object.values(sums));
+  const tops = Object.keys(sums).filter(k=>sums[k]===max && max>0);
+
+  /* прошлый замер (старше 7 дней) для сравнения */
+  const h = store.all();
+  const myDate = h.length ? h[h.length-1].d : Date.now();
+  const prev = h.slice(0,-1).reverse().find(x => Array.isArray(x.a) && x.a.length===N && (myDate - x.d) > 7*864e5);
+  let compareBlock = "";
+  if(prev){
+    const ps = sumsOf(prev.a);
+    const pt = Object.values(ps).reduce((a,b)=>a+b,0);
+    const diff = total - pt;
+    const sign = diff<0 ? `<span style="color:var(--sage)">${diff}</span>` : diff>0 ? `<span style="color:var(--rust)">+${diff}</span>` : "0";
+    const rows = Object.keys(CATS).map(k=>{
+      const d = sums[k]-ps[k];
+      const dd = d<0?`<span style="color:var(--sage)">${d}</span>`:d>0?`<span style="color:var(--rust)">+${d}</span>`:"0";
+      return `<div class="bar"><span class="name">${CATS[k].name}</span><span class="val">${ps[k]} → ${sums[k]} (${dd})</span></div>`;
+    }).join("");
+    compareBlock = `<div class="card"><div class="label"><b>Сравнение</b> · с ${fmtDate(prev.d)}</div>
+      <p class="text" style="margin-top:12px">Было ${pt} «да», стало ${total} (${sign}). ${diff<0?"Утечек стало меньше.":diff>0?"Утечек стало больше. Посмотрите, где именно.":"Картина не изменилась."}</p>
+      <div class="bars">${rows}</div></div>`;
+  }
+
+  /* Telegram: в ссылку кладём источник и результат, бот сохранит их в карточке человека */
+  const code = `en_${SRC}_${sums.phys}${sums.emo}${sums.ment}${sums.spir}`.slice(0,64);
+  const tgLink = LINKS.tgBot ? `https://t.me/${LINKS.tgBot}?start=${code}` : LINKS.telegram;
+
+  let level, levelText;
+  if(total<=8){
+    level = "Запас энергии высокий";
+    levelText = "У Вас высокий уровень жизненной энергии. Но даже несколько «да» показывают, где силы утекают. Закройте эти места, и энергии станет ещё больше.";
+  } else if(total<=16){
+    level = "Запас энергии ниже нормы";
+    levelText = "Сил уже не хватает на всё, что Вы хотите. Пора пересмотреть приоритеты и начать восстанавливать ресурс, иначе усталость станет нормой.";
+  } else {
+    level = "Энергия на нуле";
+    levelText = "Вы работаете на остатках сил. Это сигнал остановиться, пересмотреть приоритеты и всерьёз заняться восстановлением. Начните с главной утечки ниже.";
+  }
+
+  const bars = Object.keys(CATS).map(k=>{
+    let t=''; for(let i=0;i<7;i++) t += `<i class="${i<sums[k]?'on':''}"></i>`;
+    return `<div class="bar ${tops.includes(k)?'top':''}"><span class="name">${CATS[k].name}</span><span class="val">${sums[k]} / 7</span><div class="track">${t}</div></div>`;
+  }).join("");
+
+  let leakBlock;
+  if(max===0){
+    leakBlock = `<div class="card"><h2>Утечек <em>не найдено</em></h2><p class="text m" style="margin-top:10px">Вы не отметили ни одного утверждения. Отличный результат. Пройдите тест ещё раз через месяц и сравните.</p></div>`;
+  } else {
+    leakBlock = tops.map(k=>{
+      const c = CATS[k];
+      return `<div class="card">
+        <div class="label"><b>Главная утечка</b> · ${c.full}</div>
+        <h2 style="margin-top:12px">${c.leak.replace(/через (.+)$/,'через <em>$1</em>')}</h2>
+        <p class="text m" style="margin-top:12px">${c.why}</p>
+        <div class="label" style="margin-top:18px">Где именно утекает</div>
+        <ul class="leaks">${yesTexts[k].map(t=>`<li>${t}</li>`).join("")}</ul>
+        <div class="label" style="margin-top:18px">С чего начать на этой неделе</div>
+        <ol class="steps">${c.steps.map(s=>`<li>${s}</li>`).join("")}</ol>
+      </div>`;
+    }).join("");
+  }
+
+  app.innerHTML = `
+  <div class="fade">
+    <div class="top"><span class="label">Кайдзен · <b>Энергия</b></span><span class="label">Результат</span></div>
+    ${scale(N)}
+    <div class="total"><span class="big">${total}</span><span class="of">/ ${N} «да»</span></div>
+    <div class="level">${level}</div>
+    <p class="text m">${levelText}</p>
+
+    <div class="card">
+      <div class="label">Где больше всего утечек</div>
+      <div class="bars">${bars}</div>
+    </div>
+
+    ${leakBlock}
+
+    ${compareBlock}
+
+    <div class="card">
+      <div class="label"><b>Ваша точка отсчёта</b> · ${fmtDate(myDate)}</div>
+      <p class="text" style="margin-top:12px">Сохраните этот результат. Через 12 недель пройдите тест снова: если утечки закрываются, число «да» станет меньше. Так видно, что изменилось на самом деле, а не «вроде стало лучше».</p>
+    </div>
+
+    <p class="sign">Тест показывает картину на сегодня. Чтобы утечки закрылись, нужен недельный ритм: каждую неделю немного менять то, что забирает силы. Этим мы и занимаемся в клубе Kaizen Track.</p>
+
+    <div class="cta">
+      <a class="btn main" id="tg" href="${tgLink}" target="_blank" rel="noopener">Получить план на 4 недели в Telegram</a>
+      <p class="small" style="margin:8px 0 14px">Бесплатно. Пришлю план закрытия Вашей главной утечки, напомню о повторном замере через 12 недель и позову на открытый эфир.</p>
+      <button class="btn ghost" id="share">Отправить тест другу</button>
+      <button class="btn ghost" id="again" style="border-color:transparent;color:var(--muted)">Пройти заново</button>
+    </div>
+    <p class="small">Александр Цырульников · <a href="${LINKS.instagram}" style="color:inherit">@atsyrulnikov</a></p>
+  </div>`;
+  document.getElementById("again").onclick = () => { answers = []; idx = 0; question(); };
+  document.getElementById("share").onclick = async () => {
+    const url = location.href.split("#")[0].split("?")[0];
+    const data = {title:"Куда уходит Ваша энергия", text:"Тест на 3 минуты: показывает, через что утекает энергия.", url};
+    try{
+      if(navigator.share){ await navigator.share(data); }
+      else { await navigator.clipboard.writeText(url); document.getElementById("share").textContent = "Ссылка скопирована"; }
+    }catch(e){}
+  };
+  window.scrollTo(0,0);
+}
+
+const hist = store.all();
+const last = hist[hist.length-1];
+if(last && Array.isArray(last.a) && last.a.length===N && (Date.now()-last.d) < RETEST_DAYS*864e5){ answers = last.a; result(); } else intro();
+</script>
+</body>
+</html>
