@@ -93,10 +93,19 @@ ol.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;le
 <script>
 /* ===== Настройки: ссылки для кнопок в конце ===== */
 const LINKS = {
-  telegram: "https://t.me/atsyrulnikov",      // Телеграм-канал
-  club: "https://t.me/atsyrulnikov",           // Клуб Kaizen Track (заменить на страницу клуба, когда будет)
+  telegram: "https://t.me/atsyrulnikov",      // Телеграм-канал (запасной вариант, пока нет бота)
+  tgBot: "",                                   // имя Telegram-бота без @, например "atsyrulnikov_bot". Когда появится, кнопка поведёт в бота с результатом и источником
   instagram: "https://instagram.com/atsyrulnikov"
 };
+const RETEST_DAYS = 84; // повторный замер через 12 недель
+
+/* Источник: ссылка вида .../energiya/?src=reels-energiya. Сохраняем, чтобы знать, откуда пришёл человек */
+const SRC = (() => {
+  let s = "";
+  try { s = new URLSearchParams(location.search).get("src") || ""; } catch(e){}
+  s = s.toLowerCase().replace(/[^a-z0-9-]/g,"").slice(0,24);
+  return s || "direct";
+})();
 
 const CATS = {
   phys: {
@@ -148,12 +157,12 @@ const Q = [
   ["phys","У меня есть одна или несколько вредных привычек: много сладкого или жирного, алкоголь, курение."],
   ["phys","Я не хожу регулярно в спортзал, не делаю кардио или силовых тренировок."],
   ["phys","В течение рабочего дня у меня почти нет возможности сделать перерыв и восстановиться."],
-  ["phys","Я знаю, что храплю во время сна или сплю с открытым ртом."],
+  ["phys","К вечеру у меня нет сил ни на семью, ни на себя: только лечь и листать телефон."],
   ["emo","Я часто раздражаюсь или беспокоюсь на работе, особенно когда задача ответственная или нужен быстрый результат."],
   ["emo","Мне не хватает позитивных эмоций, и я не знаю, где их взять."],
   ["emo","Я расстраиваюсь или злюсь, если не получаю быстрых результатов в работе или жизни."],
   ["emo","Я редко нахожу время, чтобы выразить благодарность людям вокруг."],
-  ["emo","Я редко помогаю людям просто так, не ожидая ничего взамен."],
+  ["emo","Я откладываю неприятные решения и разговоры, и они неделями висят на мне."],
   ["emo","Я редко уделяю время любимым занятиям, которые дарят мне радость."],
   ["emo","Мне сложно поверить в себя, собраться и продолжать действовать, когда трудно."],
   ["ment","У меня не получается выделять в течение дня время на короткий отдых и «перезагрузку»."],
@@ -161,7 +170,7 @@ const Q = [
   ["ment","Мне сложно выделить из списка дел то, что важно сейчас, и держать на этом фокус."],
   ["ment","Мне трудно полностью расслабиться и успокоиться после тяжёлого рабочего дня."],
   ["ment","Я мало размышляю о своей жизни и редко её планирую."],
-  ["ment","Я редко узнаю и применяю в жизни новые инструменты или знания."],
+  ["ment","Я делаю много задач, которые мог(ла) бы отдать сотрудникам или подрядчикам."],
   ["ment","Я редко трачу время на развлечения и не умею весело отдыхать."],
   ["spir","Я не чувствую, что делаю что-то важное и вношу вклад в хорошие перемены вокруг."],
   ["spir","Я не очень понимаю свою настоящую цель и не чувствую причастности к чему-то большему."],
@@ -169,18 +178,24 @@ const Q = [
   ["spir","Я замечаю расхождение между своими ценностями и тем, куда на самом деле уходят моё время, внимание и силы."],
   ["spir","Мне сложно самостоятельно расставлять приоритеты и делать то, во что я верю."],
   ["spir","Мне сложно найти в своём графике время только для себя."],
-  ["spir","Я не понимаю, чем могу быть полезен(-на) другим."]
+  ["spir","Я не могу ясно сказать, чего хочу от следующего года."]
 ];
 
 const N = Q.length;
 let answers = [];
 let idx = 0;
 const app = document.getElementById("app");
+/* История замеров на этом устройстве: [{d: дата, a: ответы, src}] */
 const store = {
-  get(){ try{ return JSON.parse(localStorage.getItem("energy-test")||"null"); }catch(e){ return null; } },
-  set(v){ try{ localStorage.setItem("energy-test", JSON.stringify(v)); }catch(e){} },
-  clear(){ try{ localStorage.removeItem("energy-test"); }catch(e){} }
+  all(){ try{ const v = JSON.parse(localStorage.getItem("energy-test-v2")||"[]"); return Array.isArray(v)?v:[]; }catch(e){ return []; } },
+  add(a){ try{ const h = store.all(); h.push({d: Date.now(), a, src: SRC}); localStorage.setItem("energy-test-v2", JSON.stringify(h.slice(-12))); }catch(e){} }
 };
+function sumsOf(a){
+  const s = {phys:0,emo:0,ment:0,spir:0};
+  a.forEach((v,i)=>{ if(v) s[Q[i][0]]++; });
+  return s;
+}
+function fmtDate(t){ try{ return new Date(t).toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"}); }catch(e){ return ""; } }
 
 function scale(done){
   let s = '<div class="scale" aria-hidden="true">';
@@ -198,13 +213,14 @@ function intro(){
     <div class="top"><span class="label">Кайдзен · <b>Энергия</b></span><span class="label">Тест</span></div>
     ${scale(-1)}
     <h1>Куда уходит Ваша <em>энергия</em></h1>
-    <p class="lead">28 коротких утверждений. Отвечайте честно, как есть сегодня, а не как хотелось бы.</p>
+    <p class="lead">Дела наваливаются, важное откладывается, к вечеру пусто. Чаще всего дело не в дисциплине, а в том, куда утекает энергия. Тест покажет, где именно.</p>
     <div class="facts">
       <div><div class="num">28</div><div class="label">вопросов</div></div>
       <div><div class="num">3</div><div class="label">минуты</div></div>
       <div><div class="num">4</div><div class="label">вида энергии</div></div>
     </div>
     <p class="quote">Время у всех одинаковое. Разница в том, сколько в нём энергии.</p>
+    <p class="text m" style="font-size:15px">Отвечайте честно, как есть сегодня, а не как хотелось бы. Результат станет Вашей точкой отсчёта: через 12 недель пройдите тест ещё раз и сравните.</p>
   </div>
   <div class="grow"></div>
   <button class="btn main" id="start">Начать тест</button>
@@ -230,7 +246,7 @@ function question(){
   app.querySelectorAll(".answers .btn").forEach(b => b.onclick = () => {
     answers[idx] = +b.dataset.v;
     idx++;
-    if(idx>=N){ store.set(answers); result(); } else question();
+    if(idx>=N){ store.add(answers.slice()); result(); } else question();
   });
   document.getElementById("back").onclick = () => { if(idx>0){ idx--; question(); } };
   window.scrollTo(0,0);
@@ -244,15 +260,39 @@ function result(){
   const max = Math.max(...Object.values(sums));
   const tops = Object.keys(sums).filter(k=>sums[k]===max && max>0);
 
+  /* прошлый замер (старше 7 дней) для сравнения */
+  const h = store.all();
+  const myDate = h.length ? h[h.length-1].d : Date.now();
+  const prev = h.slice(0,-1).reverse().find(x => Array.isArray(x.a) && x.a.length===N && (myDate - x.d) > 7*864e5);
+  let compareBlock = "";
+  if(prev){
+    const ps = sumsOf(prev.a);
+    const pt = Object.values(ps).reduce((a,b)=>a+b,0);
+    const diff = total - pt;
+    const sign = diff<0 ? `<span style="color:var(--sage)">${diff}</span>` : diff>0 ? `<span style="color:var(--rust)">+${diff}</span>` : "0";
+    const rows = Object.keys(CATS).map(k=>{
+      const d = sums[k]-ps[k];
+      const dd = d<0?`<span style="color:var(--sage)">${d}</span>`:d>0?`<span style="color:var(--rust)">+${d}</span>`:"0";
+      return `<div class="bar"><span class="name">${CATS[k].name}</span><span class="val">${ps[k]} → ${sums[k]} (${dd})</span></div>`;
+    }).join("");
+    compareBlock = `<div class="card"><div class="label"><b>Сравнение</b> · с ${fmtDate(prev.d)}</div>
+      <p class="text" style="margin-top:12px">Было ${pt} «да», стало ${total} (${sign}). ${diff<0?"Утечек стало меньше.":diff>0?"Утечек стало больше. Посмотрите, где именно.":"Картина не изменилась."}</p>
+      <div class="bars">${rows}</div></div>`;
+  }
+
+  /* Telegram: в ссылку кладём источник и результат, бот сохранит их в карточке человека */
+  const code = `en_${SRC}_${sums.phys}${sums.emo}${sums.ment}${sums.spir}`.slice(0,64);
+  const tgLink = LINKS.tgBot ? `https://t.me/${LINKS.tgBot}?start=${code}` : LINKS.telegram;
+
   let level, levelText;
   if(total<=8){
-    level = "Энергии в целом хватает";
+    level = "Запас энергии высокий";
     levelText = "У Вас высокий уровень жизненной энергии. Но даже несколько «да» показывают, где силы утекают. Закройте эти места, и энергии станет ещё больше.";
   } else if(total<=16){
-    level = "Заметный дефицит энергии";
+    level = "Запас энергии ниже нормы";
     levelText = "Сил уже не хватает на всё, что Вы хотите. Пора пересмотреть приоритеты и начать восстанавливать ресурс, иначе усталость станет нормой.";
   } else {
-    level = "Сильный дефицит энергии";
+    level = "Энергия на нуле";
     levelText = "Вы работаете на остатках сил. Это сигнал остановиться, пересмотреть приоритеты и всерьёз заняться восстановлением. Начните с главной утечки ниже.";
   }
 
@@ -294,17 +334,24 @@ function result(){
 
     ${leakBlock}
 
-    <p class="sign">Один тест показывает картину на сегодня. Чтобы утечки закрылись, нужен ритм: каждую неделю немного менять то, что забирает силы. Этим мы и занимаемся в клубе Kaizen Track.</p>
+    ${compareBlock}
+
+    <div class="card">
+      <div class="label"><b>Ваша точка отсчёта</b> · ${fmtDate(myDate)}</div>
+      <p class="text" style="margin-top:12px">Сохраните этот результат. Через 12 недель пройдите тест снова: если утечки закрываются, число «да» станет меньше. Так видно, что изменилось на самом деле, а не «вроде стало лучше».</p>
+    </div>
+
+    <p class="sign">Тест показывает картину на сегодня. Чтобы утечки закрылись, нужен недельный ритм: каждую неделю немного менять то, что забирает силы. Этим мы и занимаемся в клубе Kaizen Track.</p>
 
     <div class="cta">
-      <a class="btn main" href="${LINKS.club}" target="_blank" rel="noopener">Узнать про клуб Kaizen Track</a>
-      <a class="btn ghost" href="${LINKS.telegram}" target="_blank" rel="noopener">Больше пользы в Телеграм-канале</a>
+      <a class="btn main" id="tg" href="${tgLink}" target="_blank" rel="noopener">Получить план на 4 недели в Telegram</a>
+      <p class="small" style="margin:8px 0 14px">Бесплатно. Пришлю план закрытия Вашей главной утечки, напомню о повторном замере через 12 недель и позову на открытый эфир.</p>
       <button class="btn ghost" id="share">Отправить тест другу</button>
       <button class="btn ghost" id="again" style="border-color:transparent;color:var(--muted)">Пройти заново</button>
     </div>
     <p class="small">Александр Цырульников · <a href="${LINKS.instagram}" style="color:inherit">@atsyrulnikov</a></p>
   </div>`;
-  document.getElementById("again").onclick = () => { store.clear(); intro(); };
+  document.getElementById("again").onclick = () => { answers = []; idx = 0; question(); };
   document.getElementById("share").onclick = async () => {
     const url = location.href.split("#")[0].split("?")[0];
     const data = {title:"Куда уходит Ваша энергия", text:"Тест на 3 минуты: показывает, через что утекает энергия.", url};
@@ -316,8 +363,9 @@ function result(){
   window.scrollTo(0,0);
 }
 
-const saved = store.get();
-if(Array.isArray(saved) && saved.length===N){ answers = saved; result(); } else intro();
+const hist = store.all();
+const last = hist[hist.length-1];
+if(last && Array.isArray(last.a) && last.a.length===N && (Date.now()-last.d) < RETEST_DAYS*864e5){ answers = last.a; result(); } else intro();
 </script>
 </body>
 </html>
