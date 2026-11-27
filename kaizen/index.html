@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kaizen Track · клуб личной эффективности</title>
+<meta name="description" content="Клуб Kaizen Track: за три месяца свой план на год и ритм, в котором он движется. Начните с бесплатной диагностики «Ваша точка А»: три теста по 3 минуты.">
+<meta property="og:title" content="Kaizen Track · Ваша точка А">
+<meta property="og:description" content="Три теста по 3 минуты: куда Вы идёте, почему цели умирают в феврале и куда уходит энергия.">
+<meta name="theme-color" content="#0B1E33">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B1E33; --navy2:#10283F; --navy3:#173351; --gold:#D6A25E; --gold2:#E7BE85;
+  --light:#F6F2E8; --steel:#7A8A9A; --ink:#0B1E33;
+  --muted:rgba(246,242,232,.66); --line:rgba(246,242,232,.16); --line2:rgba(246,242,232,.08);
+  --ok:#8FB59A; --warn:#D6A25E; --bad:#D07A5E;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{background:var(--navy);color:var(--light)}
+body{font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,.m{font-family:Manrope,system-ui,sans-serif}
+a{color:inherit}
+.gold{color:var(--gold)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.narrow{max-width:620px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+section.light{background:var(--light);color:var(--ink)}
+section.light .muted{color:rgba(11,30,51,.66)}
+section.alt{background:var(--navy2)}
+.muted{color:var(--muted)}
+.kicker{font:600 12px/1 Manrope,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h2{font-weight:800;font-size:clamp(28px,5.4vw,42px);line-height:1.1;letter-spacing:-.6px;margin-bottom:16px}
+h3{font-weight:700;font-size:20px;line-height:1.25;margin-bottom:8px}
+p.lead{font-size:18px;max-width:46ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:17px 24px;font:700 16px Manrope,sans-serif;cursor:pointer;text-decoration:none;transition:transform .08s,background .2s,border-color .2s}
+.btn:active{transform:scale(.98)}
+.btn.main{background:var(--gold);color:var(--navy)}
+.btn.main:hover{background:var(--gold2)}
+.btn.ghost{background:transparent;color:var(--light);border:1.5px solid rgba(246,242,232,.4)}
+.btn.ghost:hover{border-color:var(--gold)}
+.light .btn.ghost{color:var(--ink);border-color:rgba(11,30,51,.35)}
+.btn.block{display:flex;width:100%}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+
+/* header */
+header.top{position:sticky;top:0;z-index:20;background:rgba(11,30,51,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line2)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:34px;height:34px;flex:none}
+.brand b{font:800 17px Manrope,sans-serif;letter-spacing:.06em}
+.brand b span{color:var(--gold)}
+header.top nav{display:flex;gap:22px;align-items:center}
+header.top nav a{text-decoration:none;font:600 14px Manrope,sans-serif;color:var(--muted)}
+header.top nav a:hover{color:var(--light)}
+header.top .btn{padding:10px 16px;font-size:14px;border-radius:10px}
+@media(max-width:760px){header.top nav a.hide-s{display:none}}
+
+/* hero */
+.hero{position:relative;padding:64px 0 80px;overflow:hidden;background:radial-gradient(120% 80% at 80% 110%,#2a3f57 0%,rgba(11,30,51,0) 60%),var(--navy)}
+.hero .mount{position:absolute;right:-40px;bottom:-6px;width:min(760px,110%);opacity:.9;pointer-events:none}
+.hero .wrap{position:relative}
+.hero h1{font-weight:800;font-size:clamp(38px,7.6vw,68px);line-height:1.02;letter-spacing:-1.4px;max-width:14ch;margin:10px 0 22px}
+.hero p.lead{color:var(--muted);margin-bottom:30px}
+.hero .tag{display:inline-block;border:1px solid rgba(214,162,94,.5);color:var(--gold);border-radius:99px;padding:6px 12px;font:600 12px Manrope,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.hero .facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:44px;color:var(--muted);font-size:14px}
+.hero .facts b{display:block;font:800 22px Manrope,sans-serif;color:var(--light)}
+
+/* key phrase */
+.phrase{font:700 clamp(24px,4.4vw,36px)/1.25 Manrope,sans-serif;letter-spacing:-.4px;max-width:28ch}
+.phrase em{font-style:normal;color:#9A6A2E}
+
+/* cards grid */
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:860px){.g3{grid-template-columns:1fr}}
+@media(max-width:640px){.g2{grid-template-columns:1fr}}
+.card{background:var(--navy2);border:1px solid var(--line2);border-radius:20px;padding:24px}
+.light .card{background:#fff;border-color:rgba(11,30,51,.08)}
+.card .q{font:800 13px Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.light .card .q{color:#9A6A2E}
+
+/* tests cards */
+.tcard{display:flex;flex-direction:column;gap:12px;position:relative}
+.tcard .num{font:800 54px/1 Manrope,sans-serif;color:rgba(214,162,94,.22)}
+.tcard h3{font-size:22px}
+.tcard .meta{font-size:13px;color:var(--muted)}
+.tcard .grow{flex:1}
+.tcard .done{display:none;align-items:baseline;gap:8px;border-top:1px solid var(--line);padding-top:12px}
+.tcard.has .done{display:flex}
+.tcard .done b{font:800 28px Manrope,sans-serif;color:var(--gold)}
+.pointa{margin-top:22px;border:1px dashed rgba(214,162,94,.45);border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.pointa .dots{display:flex;gap:8px}
+.pointa .dots i{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--gold)}
+.pointa .dots i.on{background:var(--gold)}
+
+/* system ladder */
+.ladder{display:grid;gap:8px;max-width:640px}
+.ladder div{display:flex;align-items:center;gap:14px;background:#fff;border-radius:14px;padding:14px 18px;font:700 16px Manrope,sans-serif}
+.ladder div span{font:500 14px Inter,sans-serif;color:rgba(11,30,51,.6);margin-left:auto;text-align:right}
+.ladder div i{font-style:normal;width:28px;height:28px;border-radius:8px;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;flex:none}
+@media(max-width:560px){.ladder div{flex-wrap:wrap}.ladder div span{margin-left:42px;text-align:left;width:100%}}
+.weeks{display:grid;grid-template-columns:repeat(52,1fr);gap:2px;margin:28px 0 8px;max-width:640px}
+.weeks i{height:16px;border-radius:2px;background:rgba(11,30,51,.12)}
+.weeks i.c{background:#9A6A2E}
+.weeks i.q{background:var(--navy)}
+.wlab{display:flex;justify-content:space-between;max-width:640px;font-size:12px;color:rgba(11,30,51,.6)}
+
+/* program table */
+.prog{display:grid;gap:14px}
+.prog .card{display:grid;grid-template-columns:120px 1fr;gap:16px}
+.prog .mon{font:800 22px Manrope,sans-serif;color:var(--gold)}
+.prog .mon small{display:block;font:500 13px Inter,sans-serif;color:var(--muted);margin-top:4px}
+@media(max-width:560px){.prog .card{grid-template-columns:1fr;gap:6px}}
+.note{margin-top:18px;padding:18px 20px;border-left:3px solid var(--gold);background:rgba(214,162,94,.08);border-radius:0 14px 14px 0}
+
+/* rhythm */
+.rhythm{display:grid;gap:0;border-top:1px solid rgba(11,30,51,.12)}
+.rhythm div{display:grid;grid-template-columns:160px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid rgba(11,30,51,.12)}
+.rhythm b{font:800 16px Manrope,sans-serif}
+@media(max-width:560px){.rhythm div{grid-template-columns:1fr;gap:4px}}
+
+ul.clean{list-style:none}
+ul.clean li{position:relative;padding:8px 0 8px 26px}
+ul.clean li:before{content:"";position:absolute;left:2px;top:17px;width:10px;height:2px;background:var(--gold)}
+
+.people .card p+p{margin-top:10px}
+.avatar{width:56px;height:56px;border-radius:16px;background:var(--navy3);display:flex;align-items:center;justify-content:center;font:800 22px Manrope,sans-serif;color:var(--gold);margin-bottom:14px}
+.quote{font:600 18px/1.45 Manrope,sans-serif}
+.quote+.who{margin-top:14px;font-size:14px;color:var(--muted)}
+.light .quote+.who{color:rgba(11,30,51,.6)}
+
+.price{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px}
+@media(max-width:640px){.price{grid-template-columns:1fr}}
+.price .card .sum{font:800 40px Manrope,sans-serif;margin:8px 0 2px}
+.price .card.best{border:1.5px solid var(--gold)}
+
+details{border-bottom:1px solid rgba(11,30,51,.12);padding:18px 0}
+details summary{cursor:pointer;list-style:none;font:700 17px Manrope,sans-serif;display:flex;justify-content:space-between;gap:12px}
+details summary::-webkit-details-marker{display:none}
+details summary:after{content:"+";color:#9A6A2E;font-size:22px;line-height:1}
+details[open] summary:after{content:"−"}
+details p{margin-top:10px;color:rgba(11,30,51,.75)}
+
+footer{padding:40px 0 60px;border-top:1px solid var(--line2);color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+
+/* ===== test app ===== */
+#app{display:none;min-height:100vh;min-height:100dvh}
+body.testing #site{display:none}
+body.testing #app{display:block}
+.app{max-width:600px;margin:0 auto;padding:18px 20px 48px;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.apptop{display:flex;align-items:center;justify-content:space-between;gap:12px;height:44px}
+.apptop button{background:none;border:0;color:var(--muted);font:600 14px Manrope,sans-serif;cursor:pointer;padding:8px 0}
+.apptop button:disabled{visibility:hidden}
+.prog52{display:flex;gap:3px;margin:8px 0 0;align-items:flex-end}
+.prog52 i{flex:1;height:8px;border-radius:2px;background:var(--line)}
+.prog52 i.on{background:var(--light)}
+.prog52 i.now{background:var(--gold);height:12px}
+.screen{flex:1;display:flex;flex-direction:column}
+.screen h1{font-weight:800;font-size:clamp(32px,8.4vw,46px);line-height:1.06;letter-spacing:-.8px;margin:36px 0 16px}
+.screen .lead{font-size:17px;color:var(--muted);max-width:40ch}
+.screen .sp{flex:1;min-height:28px}
+.ifacts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:28px 0}
+.ifacts div{padding:14px 4px}
+.ifacts div+div{border-left:1px solid var(--line);padding-left:14px}
+.ifacts b{display:block;font:800 26px Manrope,sans-serif}
+.ifacts span{font-size:12px;color:var(--muted)}
+.zone{font:700 12px Manrope,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:34px}
+.stmt{font:700 clamp(22px,6vw,28px)/1.28 Manrope,sans-serif;letter-spacing:-.3px;margin:14px 0 8px;min-height:5.2em}
+.hint{font-size:14px;color:var(--muted);margin-bottom:20px}
+.answers{display:grid;gap:10px}
+.answers button{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--navy2);color:var(--light);border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;font:600 16px Manrope,sans-serif;cursor:pointer;transition:border-color .15s,background .15s}
+.answers button i{font-style:normal;width:28px;height:28px;border-radius:8px;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--muted);flex:none}
+.answers button:hover{border-color:rgba(214,162,94,.6)}
+.answers button.sel{border-color:var(--gold);background:rgba(214,162,94,.12)}
+.answers button.sel i{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{background:var(--navy2);color:var(--light);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:600 15px Manrope,sans-serif;cursor:pointer}
+.chips button.sel{border-color:var(--gold);background:rgba(214,162,94,.14)}
+.chips.n10 button{width:calc(20% - 7px);padding:12px 0;text-align:center}
+.fade{animation:fade .26s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* result */
+.res-head{display:flex;gap:20px;align-items:center;margin-top:28px}
+.ring{width:132px;height:132px;flex:none;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 40px/1 Manrope,sans-serif}
+.ring b small{font:500 12px Inter,sans-serif;color:var(--muted);margin-top:4px}
+.res-head .lvl{font:800 22px/1.2 Manrope,sans-serif}
+.res-head .lvl small{display:block;font:500 14px Inter,sans-serif;color:var(--muted);margin-top:6px}
+.rcard{background:var(--navy2);border:1px solid var(--line2);border-radius:20px;padding:22px 20px;margin-top:18px}
+.rcard .q{font:700 12px Manrope,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.rcard h2{font-size:28px;margin-bottom:8px}
+.bars .bar{display:grid;grid-template-columns:1fr auto;gap:6px 10px;margin-top:14px}
+.bars .bar .n{font:700 15px Manrope,sans-serif}
+.bars .bar .v{font:700 14px Manrope,sans-serif;color:var(--muted)}
+.bars .bar .t{grid-column:1/-1;height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.bars .bar .t i{display:block;height:100%;border-radius:5px;background:var(--light)}
+.bars .bar.weak .n{color:var(--gold)}
+.bars .bar.weak .t i{background:var(--gold)}
+.bars .bar .d{font-size:12px;color:var(--muted);grid-column:1/-1;margin-top:-2px}
+ol.steps{list-style:none;counter-reset:s;margin-top:6px}
+ol.steps li{counter-increment:s;position:relative;padding:12px 0 12px 40px;border-top:1px solid var(--line)}
+ol.steps li:first-child{border-top:0}
+ol.steps li:before{content:counter(s);position:absolute;left:0;top:11px;width:26px;height:26px;border-radius:8px;background:var(--gold);color:var(--navy);font:800 13px Manrope,sans-serif;display:flex;align-items:center;justify-content:center}
+ol.steps li small{display:block;color:var(--muted);font-size:13px;margin-bottom:3px}
+.radar{display:block;width:100%;max-width:400px;margin:8px auto 0}
+.cta{margin-top:22px;display:grid;gap:10px}
+.small{font-size:13px;color:var(--muted);text-align:center}
+.cmp{display:grid;grid-template-columns:1fr auto auto;gap:6px 14px;margin-top:10px;font-size:15px}
+.cmp b{font-family:Manrope,sans-serif}
+.cmp .up{color:var(--ok)} .cmp .dn{color:var(--bad)}
+.next{display:grid;gap:10px;margin-top:8px}
+.next a{display:flex;justify-content:space-between;align-items:center;gap:12px;text-decoration:none;background:var(--navy3);border-radius:14px;padding:14px 16px;font:700 15px Manrope,sans-serif}
+.next a span{font:500 13px Inter,sans-serif;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- ===================== SITE ===================== -->
+<div id="site">
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Kaizen Track">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#F6F2E8"/><stop offset="1" stop-color="#D6A25E"/></linearGradient></defs><path d="M18 22a20 20 0 0 1 36 6" fill="none" stroke="#D6A25E" stroke-width="3.2" stroke-linecap="round"/><path d="M4 52 L22 34 L28 40 L38 22 L58 52" fill="none" stroke="url(#lg)" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M30 52c6-4 2-8 8-11" fill="none" stroke="#D6A25E" stroke-width="2.6" stroke-linecap="round"/></svg>
+      <b>KAIZEN <span>TRACK</span></b>
+    </a>
+    <nav>
+      <a class="hide-s" href="#tests">Диагностика</a>
+      <a class="hide-s" href="#program">Программа</a>
+      <a class="hide-s" href="#price">Стоимость</a>
+      <a class="btn main js-join" href="#price">Вступить</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <svg class="mount" viewBox="0 0 760 300" aria-hidden="true"><defs><linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D6A25E" stop-opacity=".55"/><stop offset=".55" stop-color="#173351" stop-opacity=".9"/><stop offset="1" stop-color="#0B1E33"/></linearGradient></defs><circle cx="520" cy="120" r="86" fill="none" stroke="#D6A25E" stroke-opacity=".35" stroke-width="2"/><path d="M0 300 L140 190 L210 230 L330 120 L410 180 L520 70 L640 170 L700 140 L760 180 L760 300Z" fill="url(#mg)"/><path d="M520 70 L560 104 L540 100 L520 120 L506 98 L490 104Z" fill="#F6F2E8" fill-opacity=".55"/></svg>
+  <div class="wrap">
+    <span class="tag">Клуб личной эффективности</span>
+    <h1>Свой план на год <span class="gold">и ритм,</span> в котором он движется</h1>
+    <p class="lead">Kaizen Track для руководителей, предпринимателей и сильных специалистов. За три месяца у Вас появится свой план на год. За год своя система, которая работает уже без нас. Не наша система, а Ваша.</p>
+    <div class="row">
+      <a class="btn main" href="#tests">Начать с бесплатной диагностики</a>
+      <a class="btn ghost" href="#how">Как устроен клуб</a>
+    </div>
+    <div class="facts">
+      <div><b>15 минут</b>в день</div>
+      <div><b>1 встреча</b>в неделю, суббота</div>
+      <div><b>12 недель</b>до первого результата</div>
+    </div>
+  </div>
+</section>
+
+<section class="light">
+  <div class="wrap">
+    <p class="phrase">Можно очень эффективно идти не туда. Поэтому мы начинаем <em>не с планирования,</em> а с того, куда Вы вообще идёте.</p>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="kicker">Для кого</div>
+    <h2>Внешне всё в порядке:<br>доход, семья, статус</h2>
+    <p class="lead muted" style="margin-bottom:28px">Но внутри одна из двух ситуаций. С ними к нам и приходят.</p>
+    <div class="grid g2">
+      <div class="card"><div class="q">Ситуация 1</div><h3>«Живу не своей жизнью»</h3><p class="muted">Умею планировать, но не знаю, куда идти. Цели вроде есть, но они не радуют. Нет ощущения своего дела.</p></div>
+      <div class="card"><div class="q">Ситуация 2</div><h3>«Хаос и перегруз»</h3><p class="muted">Знаю, куда хочу, но не дохожу. Дела наваливаются, на главное не хватает сил и ритма.</p></div>
+    </div>
+    <p class="muted" style="margin-top:22px;font-size:14px">Клуб не подойдёт, если Вы сейчас в режиме выживания, ждёте, что всё сделают за Вас, или Вам нужен врач.</p>
+  </div>
+</section>
+
+<section class="alt" id="tests">
+  <div class="wrap">
+    <div class="kicker">Бесплатная диагностика</div>
+    <h2>Ваша точка А за 10 минут</h2>
+    <p class="lead muted" style="margin-bottom:28px">Три теста по 3 минуты. С них же начинают участники клуба и проходят их снова через 12 недель, чтобы увидеть рост в цифрах.</p>
+    <div class="grid g3" id="tcards"></div>
+    <div class="pointa" id="pointa">
+      <div class="dots" id="pdots"><i></i><i></i><i></i></div>
+      <div style="flex:1;min-width:220px"><b class="m" id="ptitle">Пройдите все три теста</b><div class="muted" style="font-size:14px" id="ptext">Результаты сохранятся на этом устройстве как Ваша точка А с датой.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="system">
+  <div class="wrap">
+    <div class="kicker" style="color:#9A6A2E">Как устроена система</div>
+    <h2>Сверху вниз: от миссии до одного дня</h2>
+    <p class="lead muted" style="margin-bottom:28px">Люди бросают планирование не из-за лени. Они берут систему, которую надо обслуживать каждый день в пяти местах. У нас ежедневный инструмент один.</p>
+    <div class="ladder">
+      <div><i>1</i>Миссия и личная стратегия<span>куда Вы идёте</span></div>
+      <div><i>2</i>Итоги года<span>честная карта: где провал, а где только кажется</span></div>
+      <div><i>3</i>Цели на год<span>из миссии, а не из «так надо»</span></div>
+      <div><i>4</i>Конвейер целей<span>из хотелки в конкретную цель, с помощью ИИ</span></div>
+      <div><i>5</i>12 недель и цели месяца<span>год не заканчивается в феврале</span></div>
+      <div><i>6</i>Каждый день<span>15 минут утром</span></div>
+    </div>
+    <div class="weeks" id="weeks"></div>
+    <div class="wlab"><span>неделя 1</span><span>год = 52 недели, 4 цикла по 12 недель + разборы</span><span>52</span></div>
+  </div>
+</section>
+
+<section id="program">
+  <div class="wrap">
+    <div class="kicker">Программа</div>
+    <h2>Первые три месяца</h2>
+    <p class="lead muted" style="margin-bottom:28px">Сначала направление, потом итоги, потом цели.</p>
+    <div class="prog">
+      <div class="card"><div class="mon">Ноябрь<small>направление</small></div><div><h3>Миссия, личная стратегия, икигай, видение</h3><p class="muted">Понимание, куда Вы идёте: своя миссия хотя бы примерно, личная стратегия, своё любимое дело, прописанное видение.</p></div></div>
+      <div class="card"><div class="mon">Декабрь<small>итоги</small></div><div><h3>Челлендж «Выдающийся год»</h3><p class="muted">Честная карта жизни. Итоги года подведены не списком достижений и не самобичеванием. Ведёт Александр, старт около 10 декабря.</p></div></div>
+      <div class="card"><div class="mon">Январь<small>цели и ритм</small></div><div><h3>Цели на год и старт 12-недельного цикла</h3><p class="muted">Цели, поставленные из миссии и видения. Январь про то, как не дать году закончиться в феврале.</p></div></div>
+    </div>
+    <div class="note">«Начну с нового года»? Начнёте сейчас, и в январе у Вас будет готовый сценарий, а не чистый лист и обещание себе.</div>
+    <h3 style="margin-top:36px">Дальше в течение года</h3>
+    <ul class="clean muted" style="columns:2;column-gap:32px;max-width:720px">
+      <li>Музей жизни</li><li>Икигай: как найти своё дело</li><li>Миссия и личная стратегия</li><li>Ошибки, ведущие к успеху</li><li>Эффективные переговоры</li><li>12-недельный цикл</li><li>Lean для личных дел</li><li>ИИ в личной эффективности</li>
+    </ul>
+  </div>
+</section>
+
+<section class="light">
+  <div class="wrap">
+    <div class="kicker" style="color:#9A6A2E">Сколько времени это занимает</div>
+    <h2>15 минут в день</h2>
+    <p class="lead muted" style="margin-bottom:24px">Строить с нуля не надо: Вы получаете готовый шаблон и просто продолжаете его вести. С ИИ ещё проще.</p>
+    <div class="rhythm">
+      <div><b>Каждый день</b><span>15 минут утром: посмотрели на три цели месяца, выбрали одну главную задачу на сегодня и две второстепенные.</span></div>
+      <div><b>Каждую неделю</b><span>Короткий отчёт в клубе (что получилось, что помешало, что измените) и встреча в субботу.</span></div>
+      <div><b>Раз в месяц</b><span>Один час: итоги месяца, три цели на следующий, правка видения.</span></div>
+      <div><b>Раз в квартал</b><span>Один принцип: берёте одно правило и три месяца живёте с ним.</span></div>
+      <div><b>Раз в полгода</b><span>Выписать всё из головы на лист, если голова забилась.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="kicker">Как устроен клуб</div>
+    <h2>Курс даёт знание. Ритм дают люди рядом</h2>
+    <p class="lead muted" style="margin-bottom:28px">Одному держать ритм тяжело. Поэтому мы не отпускаем, а идём рядом, ступенька за ступенькой, пока это не станет привычкой.</p>
+    <div class="grid g2">
+      <div class="card"><div class="q">Встречи</div><h3>Каждую субботу в 10:00 по Астане</h3><p class="muted">8:00 по Москве, онлайн в Zoom. Разбираем тему и сразу работаем с ней. Запись в клубе в тот же или следующий день.</p></div>
+      <div class="card"><div class="q">Закрытая группа</div><h3>Telegram с четырьмя темами</h3><p class="muted">Объявления, база знаний с уроками и шаблонами, челлендж с заданием недели и отчётами, общение: вопросы, победы, «я буксую».</p></div>
+      <div class="card"><div class="q">ИИ-куратор</div><h3>Ответ в течение дня</h3><p class="muted">Знает все материалы клуба и единый шаблон планирования. Сложные вопросы передаёт ведущим.</p></div>
+      <div class="card"><div class="q">Точка А</div><h3>Рост в цифрах, а не в ощущениях</h3><p class="muted">В первый день Вы проходите три теста диагностики. Через 12 недель проходите заново и сравниваете. <a href="#tests" class="gold">Начать можно уже сейчас.</a></p></div>
+    </div>
+    <p class="muted" style="margin-top:20px;font-size:14px">Новичкам: главное челлендж, базу знаний смотрите, когда есть время. Никто не отстанет.</p>
+  </div>
+</section>
+
+<section class="alt people">
+  <div class="wrap">
+    <div class="kicker">Ведущие</div>
+    <h2>Кто идёт рядом</h2>
+    <div class="grid g2" style="margin-top:24px">
+      <div class="card"><div class="avatar">Е</div><h3>Ерик Чокпаров</h3><p class="muted">Соавтор Kaizen Track, Уральск. Работает в найме на полный день и ведёт проект параллельно: живой пример того, что система работает при плотном графике. Инженер по образованию, годами ведёт свою систему планирования. В клубе отвечает за карту года и ежедневный ритм.</p></div>
+      <div class="card"><div class="avatar">А</div><h3>Александр Цырульников</h3><p class="muted">Соавтор, ведёт челлендж «Выдающийся год». В январе 2024 провёл такой марафон: 7 встреч за месяц, около 95 участников. 12-недельный цикл дал ему около +50% к результативности и помог наконец вылечить спину. В клубе отвечает за личную стратегию, итоги года и 12 недель.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="light">
+  <div class="wrap">
+    <div class="kicker" style="color:#9A6A2E">Результаты участников</div>
+    <h2>Что меняется</h2>
+    <div class="grid g3" style="margin-top:24px">
+      <div class="card"><p class="quote">«Смотрю назад и не понимаю, как я в той обстановке выжила».</p><p class="who"><b>Юлия.</b> Пришла на грани выгорания. Выписала всё из головы, описала жизнь, которую хочет, сменила работу и съездила в Лондон, как было записано.</p></div>
+      <div class="card"><p class="quote">Сделал больше половины выписанного и через год каждое утро открывает свою доску.</p><p class="who"><b>Ерлан.</b> Запустил приложение и свою доставку.</p></div>
+      <div class="card"><p class="quote">«Сейчас я чётко понимаю, чего хочу в жизни. До этого понимала где-то на уровне облака, а теперь приземлённо».</p><p class="who"><b>Ансаганым</b></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap">
+    <div class="kicker">Стоимость</div>
+    <h2>Подписка, а не курс на полгода</h2>
+    <p class="lead muted" style="margin-bottom:28px">Выйти можно в любой момент. О продлении напоминаем заранее.</p>
+    <div class="price">
+      <div class="card"><div class="q">Месяц</div><div class="sum m">15 000 ₸</div><p class="muted">для России 3 000 ₽</p></div>
+      <div class="card best"><div class="q">Три месяца по цене двух</div><div class="sum m">30 000 ₸</div><p class="muted">для России 6 000 ₽. Оплачиваете два месяца, третий в подарок</p></div>
+    </div>
+    <div class="row" style="margin-top:26px">
+      <a class="btn main js-join" href="#" target="_blank" rel="noopener">Вступить в клуб</a>
+      <a class="btn ghost" href="#tests">Сначала пройти диагностику</a>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="faq">
+  <div class="narrow" style="max-width:760px">
+    <div class="kicker" style="color:#9A6A2E">Вопросы</div>
+    <h2>Частые вопросы</h2>
+    <details><summary>Я уже проходил Ваш курс. Это повтор?</summary><p>Нет. Большая часть тем новая: итоги года, миссия, икигай, личная стратегия, ошибки, переговоры, 12 недель, ИИ. А главное, клуб даёт ритм возвращения к инструментам, которые у Вас уже есть.</p></details>
+    <details><summary>У меня нет на это времени</summary><p>15 минут утром, короткий отчёт раз в неделю и час раз в месяц. С ИИ ещё меньше.</p></details>
+    <details><summary>Я покупал курсы и ничего не внедрил</summary><p>Так и будет, если опять купить курс. Курс даёт знание, внедрение дают ритм и люди рядом. Поэтому это клуб, а не курс.</p></details>
+    <details><summary>Я и так держу всё в голове</summary><p>В целом да. Но «в целом» легко переубедить: чужая срочная задача просто займёт место Вашей, потому что сравнивать не с чем.</p></details>
+    <details><summary>Начну с нового года</summary><p>Начнёте сейчас, и в январе у Вас будет готовый сценарий, а не чистый лист.</p></details>
+    <details><summary>Сначала разберусь с текучкой</summary><p>Текучка не заканчивается. Она не спорит с Вашими целями, она их заслоняет.</p></details>
+    <details><summary>Справлюсь сам</summary><p>Сможете. Вопрос только в том, сколько попыток уйдёт.</p></details>
+  </div>
+</section>
+
+<section class="hero" style="padding:72px 0">
+  <div class="wrap">
+    <h2 style="max-width:18ch">От целей к устойчивым результатам</h2>
+    <p class="lead muted" style="margin-bottom:26px">Начните с точки А: 10 минут, и Вы увидите, куда идёте, почему цели не доживают до февраля и куда уходят силы.</p>
+    <div class="row"><a class="btn main" href="#tests">Пройти диагностику</a><a class="btn ghost js-tg" href="#" target="_blank" rel="noopener">Telegram-канал</a></div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>© Kaizen Track · системное развитие людей и бизнеса</span><span>Ведущие: Ерик Чокпаров, Александр Цырульников</span></div></footer>
+</div>
+
+<!-- ===================== TEST APP ===================== -->
+<div id="app"><div class="app">
+  <div class="apptop"><button id="aback">← Назад</button><span class="m muted" id="atitle" style="font-size:13px;letter-spacing:.14em;text-transform:uppercase"></span><button id="aclose">Закрыть ✕</button></div>
+  <div class="prog52" id="aprog"></div>
+  <div class="screen" id="ascreen"></div>
+</div></div>
+
+<script>
+/* ===== Настройки: ссылки (заполнить, когда будут) ===== */
+var LINKS = {
+  tgBot: '',                                   // бот, например https://t.me/kaizentrack_bot — пока пусто, ведём в канал
+  channel: 'https://t.me/atsyrulnikov',        // Telegram-канал
+  join: 'https://t.me/atsyrulnikov'            // заявка в клуб (страница оплаты или личка)
+};
+
+/* ===== Тесты ===== */
+var S03 = ['Не про меня','Иногда','Часто','Почти всегда'];
+var S15 = ['Совсем нет','Скорее нет','Наполовину','Скорее да','Полностью'];
+
+var TESTS = {
+ karta: {
+  slug:'karta', code:'КАРТА', n:1, short:'Карта жизни',
+  title:'Куда Вы идёте', sub:'Карта жизни по 6 сферам: где правда провал, а где только кажется.',
+  meta:'18 вопросов · 3 минуты', scale:S15, up:true,
+  hint:'Оцените, насколько утверждение верно для Вас сейчас.',
+  levels:[[70,'Жизнь в балансе','Сферы держат друг друга. Задача года: не просесть и вырасти в главной.'],[45,'Есть перекосы','Одна-две сферы тянут на себе остальные. Это можно выровнять за 12 недель.'],[0,'Пора пересобрать','Сейчас жизнь держится на усилии. Начинать стоит с направления, а не с новых дел.']],
+  groups:[
+   {id:'h',name:'Здоровье',type:'Двигатель на износ',phrase:'Вы тянете жизнь на остатках здоровья: тело пока терпит, но счёт уже идёт.',steps:['Назначьте одно время отбоя и держите его 5 дней из 7.','Ходите 20 минут каждый день, можно совместить со звонками.','Запишите, что выбивает Вас из себя чаще всего. Это первый кандидат на изменение.']},
+   {id:'s',name:'Безопасность',type:'Без подушки',phrase:'Любая неожиданность бьёт по всему сразу, потому что опоры нет.',steps:['Посчитайте, на сколько месяцев жизни хватит того, что есть сейчас.','Откладывайте фиксированный процент с каждого поступления, даже 5%.','Выпишите 3 главных риска года и по одному шагу страховки.']},
+   {id:'f',name:'Свобода',type:'Чужой сценарий',phrase:'Внешне всё в порядке, но решения принимают обстоятельства и чужие ожидания.',steps:['Выпишите обязательства недели и отметьте, какие выбрали Вы сами.','Заблокируйте в календаре 2 часа на свою главную задачу.','Ответьте письменно: чего я хочу от следующего года, если никто не будет оценивать?']},
+   {id:'e',name:'Окружение',type:'Один в поле',phrase:'Вы многое несёте сами, и рядом мало людей, которые заряжают.',steps:['Назначьте одну встречу с человеком, после которого становится легче.','Один вечер недели проведите с семьёй без телефона.','Отметьте, с кем из коллег Вы теряете силы, и что можно поменять в договорённостях.']},
+   {id:'b',name:'Яркая жизнь',type:'Жизнь на потом',phrase:'Радость отложена до «когда всё наладится», а наладится не скоро.',steps:['Внесите в календарь одно дело только для радости на эту неделю.','Назначьте ближайшую поездку с датой, а не «когда-нибудь».','Вспомните, чем любили заниматься 10 лет назад, и верните это на 30 минут.']},
+   {id:'d',name:'Дело',type:'Дело без огня',phrase:'Работа идёт, но всё меньше даёт сил и смысла.',steps:['Выпишите задачи, которые Вас заряжают, и те, что гасят.','Отдайте или уберите одну гасящую задачу на этой неделе.','Спросите трёх клиентов, за что они Вас ценят, и запишите ответы.']}
+  ],
+  q:[
+   ['h','Меня устраивает моё самочувствие и физическая форма.'],
+   ['s','У меня есть финансовая подушка хотя бы на 3–6 месяцев жизни.'],
+   ['f','Моего дохода хватает на жизнь, и я не смотрю на каждый ценник.'],
+   ['e','Меня радуют отношения в моей семье.'],
+   ['b','У меня есть увлечение, на которое я регулярно нахожу время.'],
+   ['d','Мне нравится то, чем я занимаюсь.'],
+   ['h','Я спокойно переношу стресс и быстро восстанавливаюсь.'],
+   ['s','Мои близкие в безопасности, тревоги за них нет.'],
+   ['f','Своим временем я распоряжаюсь сам.'],
+   ['e','Рядом есть друзья, с которыми можно говорить по-настоящему.'],
+   ['b','Мои поездки и отпуска действительно восстанавливают.'],
+   ['d','Моё дело приносит людям пользу, и я это вижу.'],
+   ['h','Эмоции под моим управлением, а не я под их.'],
+   ['s','Даже когда всё меняется, у меня есть твёрдая почва под ногами.'],
+   ['f','Я понимаю свои настоящие желания, а не чужие ожидания.'],
+   ['e','Меня устраивают люди, с которыми я работаю.'],
+   ['b','Я регулярно двигаюсь и отдыхаю активно, а не только на диване.'],
+   ['d','Доход от моего дела растёт так, как я хочу.']
+  ]
+ },
+ fevral: {
+  slug:'fevral', code:'ФЕВРАЛЬ', n:2, short:'Цели и ритм',
+  title:'Почему цели умирают в феврале', sub:'Покажет, на чём именно Вы срываетесь: источник целей, формулировка, план или ритм.',
+  meta:'12 вопросов · 2 минуты', scale:S03, up:false,
+  hint:'Отвечайте по своим целям на этот год.',
+  levels:[[70,'Осознанный подход','Цели записаны, понятны и живут в ритме. Осталось держать его весь год.'],[45,'Наполовину по системе','Часть работает, но одно слабое звено тихо съедает год.'],[0,'Интуитивный подход','Цели появляются из желаний и обстоятельств и так же уходят. Это лечится системой, а не силой воли.']],
+  groups:[
+   {id:'o',name:'Источник целей',type:'Не свои цели',phrase:'Цели поставлены из «так надо», поэтому на них нет сил уже в феврале.',steps:['Пройдитесь по списку целей и у каждой спросите: «Хочу или надо?»','К главной цели допишите строку: «Это важно мне, потому что…»','Вычеркните одну цель, которая держится только на чужом мнении.']},
+   {id:'g',name:'Формулировка',type:'Цели в голове',phrase:'Цели, которых нет на бумаге, проигрывают любой срочной задаче.',steps:['Выпишите цели на один лист и держите его на виду.','К каждой цели добавьте цифру и дату: по чему Вы узнаете, что она достигнута.','Разбейте главную цель на шаги по 12 недель.']},
+   {id:'p',name:'План и приоритеты',type:'Всё и сразу',phrase:'Целей больше, чем сил, и ни одна не получает достаточно внимания.',steps:['Оставьте 3 главные цели на квартал, остальные в список «потом».','Решите, какая из трёх главная, если можно только одну.','Найдите первый шаг, который занимает не больше 30 минут.']},
+   {id:'r',name:'Ритм',type:'Рывок без ритма',phrase:'Старт сильный, но без еженедельной сверки цели тихо выпадают.',steps:['Назначьте 30 минут в пятницу или воскресенье на разбор недели.','Каждое утро выбирайте одну главную задачу дня по целям месяца.','Примите правило: пропущенная неделя значит вернуться в понедельник, а не с нового года.']}
+  ],
+  q:[
+   ['o','Часть моих целей появилась потому, что «так надо» или так делают другие.'],
+   ['g','Мои цели живут в голове, а не на бумаге.'],
+   ['p','В январе я ставлю больше целей, чем реально потяну.'],
+   ['r','О своих целях я вспоминаю, только когда год заканчивается.'],
+   ['o','Я достигаю цели и почти не чувствую радости.'],
+   ['g','Я не могу сказать, по какой цифре пойму, что цель достигнута.'],
+   ['p','Я не понимаю, какая из целей главная, и берусь за всё.'],
+   ['r','У меня нет дня в неделе, когда я сверяюсь с целями.'],
+   ['o','Мне трудно объяснить, зачем лично мне нужна моя главная цель.'],
+   ['g','У моих целей нет даты, только «в этом году» или «когда-нибудь».'],
+   ['p','Цель кажется такой большой, что непонятно, с чего начать.'],
+   ['r','После первого срыва я бросаю цель, а не возвращаюсь к ней.']
+  ]
+ },
+ energiya: {
+  slug:'energiya', code:'ЭНЕРГИЯ', n:3, short:'Энергия',
+  title:'Куда уходит Ваша энергия', sub:'Почему к вечеру нет сил и что прикрыть первым. 5 зон: тело, эмоции, внимание, дело, смысл.',
+  meta:'25 вопросов · 3 минуты', scale:S03, up:false, intro:true,
+  hint:'Отвечайте по прошлой неделе.',
+  levels:[[70,'Запас есть','Энергии хватает. Важно не растратить её на чужие задачи.'],[45,'Работаете в минус','Вы тратите больше, чем восстанавливаете. Пока держитесь, но запас тает.'],[0,'На резерве','Вы держитесь на усилии воли. Сначала закрыть утечки, потом ставить новые цели.']],
+  groups:[
+   {id:'t',name:'Тело',type:'Разряженная батарейка',phrase:'Вы тратите больше, чем заряжаетесь: сон, еда и движение идут по остаточному принципу.'},
+   {id:'m',name:'Эмоции',type:'Тихий котёл',phrase:'Силы уходят на то, чтобы сдерживаться и носить в себе нерешённое.'},
+   {id:'a',name:'Внимание',type:'Белка в колесе',phrase:'Вы заняты всё время, но главное стоит на месте.'},
+   {id:'w',name:'Дело',type:'Главный пожарный',phrase:'Бизнес держится на Вашей энергии, а не на системе.',phraseAlt:'Работа держится на Вашей энергии, а не на системе.'},
+   {id:'z',name:'Смысл',type:'Чужой маршрут',phrase:'Вы движетесь быстро, но не по своей карте.'}
+  ],
+  q:[
+   ['t','Утром мне нужно время на «раскачку», даже после нормального сна.','Первые 10 минут утра без телефона: вода, свет, движение.'],
+   ['a','Над важным делом я отвлекаюсь на уведомления и мессенджеры.','Выключите уведомления мессенджеров на первые 2 часа работы.'],
+   ['w','Я делаю задачи, которые можно отдать сотруднику или подрядчику.','Выберите одну задачу этой недели и передайте её целиком.','Я делаю задачи, которые можно было бы отдать коллеге или подрядчику.'],
+   ['m','Я срываюсь на сотрудников или близких из-за мелочей.','Когда накрывает, сделайте паузу в три вдоха до ответа и запишите повод.','Я срываюсь на коллег или близких из-за мелочей.'],
+   ['z','Жизнь чаще управляет мной, чем я ей.','Каждое утро записывайте одно решение, которое Вы принимаете сами.'],
+   ['t','Ложусь спать позже плана, потому что сижу в телефоне.','Телефон на зарядку в другой комнате за 30 минут до сна.'],
+   ['a','Я весь день занят, а главное так и не сделано.','Утром выберите одну главную задачу и сделайте её до обеда.'],
+   ['w','Одни и те же «пожары» повторяются, и тушу их я.','Выпишите пожар, который был больше двух раз, и найдите его причину.'],
+   ['m','Я откладываю неприятный разговор или решение, и оно неделями висит на мне.','Выберите один отложенный разговор и назначьте дату на этой неделе.'],
+   ['z','То, куда уходят моё время и силы, расходится с тем, что для меня важно.','Сравните, куда ушли часы недели, с тем, что для Вас важно. Найдите одно расхождение.'],
+   ['t','Я ем на бегу или вспоминаю о еде, когда уже сильно голоден.','Внесите обед в календарь как встречу на 20 минут.'],
+   ['a','После работы голова продолжает крутить задачи.','В конце дня выпишите на лист все незакрытые дела, чтобы голова отпустила.'],
+   ['w','Без меня дела останавливаются: ко мне идут с каждым вопросом.','Запишите ответы на 3 самых частых вопроса к Вам и отдайте их команде.'],
+   ['m','Я злюсь на себя, когда результат не приходит быстро.','Вечером записывайте один маленький шаг, сделанный за день.'],
+   ['z','Я не могу ясно сказать, чего хочу от следующего года.','Напишите 10 строк о том, каким Вы хотите видеть конец следующего года.'],
+   ['t','Днём я держусь на кофе, сладком или сигаретах.','Замените один кофе после обеда на 10 минут прогулки.'],
+   ['a','У меня нет плана на неделю: неделя случается сама.','30 минут в воскресенье: 3 главные задачи на неделю.'],
+   ['w','Я работаю или думаю о работе вечером и в выходные.','Назначьте время, после которого рабочий чат закрыт, хотя бы 3 вечера в неделю.'],
+   ['m','В моей неделе нет ни одного дела только для радости.','Поставьте в неделю одно дело только для радости, как встречу.'],
+   ['z','Работаю много, но всё чаще спрашиваю себя: ради чего?','Ответьте письменно: что изменится в моей жизни, если дело вырастет вдвое?'],
+   ['t','К вечеру у меня нет сил ни на семью, ни на себя.','Отметьте, в какой час силы заканчиваются, и перенесите туда лёгкие задачи.'],
+   ['a','Дела и договорённости я держу в голове и боюсь что-то забыть.','Заведите один список для всех дел и договорённостей и записывайте всё туда.'],
+   ['w','Рабочий день идёт без перерыва даже на 10 минут.','Поставьте два перерыва по 10 минут в календарь как встречи.'],
+   ['m','Рядом есть люди, после общения с которыми у меня нет сил.','Сократите на неделю время с одним человеком, после которого Вы опустошены.'],
+   ['z','В моём графике нет времени только для себя.','Заблокируйте один час в неделю только для себя и никому его не отдавайте.']
+  ]
+ }
+};
+var ORDER = ['karta','fevral','energiya'];
+var ROLES = ['Собственник бизнеса','Руководитель','Эксперт или фрилансер','Работаю в найме'];
+
+/* ===== Хранилище ===== */
+function load(){ try{ return JSON.parse(localStorage.getItem('kt_pointA')||'{}')||{}; }catch(e){ return {}; } }
+function save(d){ try{ localStorage.setItem('kt_pointA', JSON.stringify(d)); }catch(e){} }
+var SRC = (function(){ try{ var s=new URLSearchParams(location.search).get('src'); if(s){ try{sessionStorage.setItem('kt_src',s);}catch(e){} return s;} return sessionStorage.getItem('kt_src')||'site'; }catch(e){ return 'site'; } })();
+
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function fmtDate(t){ var d=new Date(t); return d.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'}); }
+
+/* ===== Главная: карточки тестов и точка А ===== */
+function renderCards(){
+  var d=load(), html='', done=0;
+  ORDER.forEach(function(k){
+    var T=TESTS[k], last=(d[k]||[]).slice(-1)[0];
+    if(last) done++;
+    html+='<div class="card tcard'+(last?' has':'')+'"><div class="num">0'+T.n+'</div><h3>'+esc(T.title)+'</h3><p class="muted">'+esc(T.sub)+'</p><div class="meta">'+T.meta+'</div><div class="grow"></div>'+
+      (last?'<div class="done"><b>'+last.index+'</b><span class="muted">из 100 · '+esc(last.type)+'</span></div>':'')+
+      '<a class="btn '+(last?'ghost':'main')+' block" href="#t/'+k+'">'+(last?'Смотреть результат':'Пройти тест')+'</a></div>';
+  });
+  document.getElementById('tcards').innerHTML=html;
+  var dots=document.querySelectorAll('#pdots i'); ORDER.forEach(function(k,i){ dots[i].className=(d[k]&&d[k].length)?'on':''; });
+  var pt=document.getElementById('ptitle'), px=document.getElementById('ptext');
+  if(done===3){ pt.textContent='Ваша точка А собрана'; px.textContent='Пройдите тесты снова через 12 недель, и мы покажем, что изменилось.'; }
+  else if(done>0){ pt.textContent='Пройдено '+done+' из 3'; px.textContent='Осталось '+(3-done)+'. Вместе они показывают направление, цели и силы.'; }
+}
+(function(){ var w=document.getElementById('weeks'),h=''; for(var i=1;i<=52;i++){ h+='<i class="'+(i%13===0?'q':(i<=12?'c':''))+'"></i>'; } w.innerHTML=h; })();
+document.querySelectorAll('.js-join').forEach(function(a){ if(a.getAttribute('href')==='#'||a.classList.contains('btn')&&a.closest('#price')) { a.href=LINKS.join; } });
+document.querySelectorAll('.js-tg').forEach(function(a){ a.href=LINKS.channel; });
+
+/* ===== Приложение теста ===== */
+var st=null, scr=document.getElementById('ascreen');
+function scoreOf(T,v){ return T.up ? (v-1)/(T.scale.length-1) : 1 - v/(T.scale.length-1); }
+function qText(T,qi){ var q=T.q[qi]; return (T.slug==='energiya' && st && st.role>=2 && q[3]) ? q[3] : q[1]; }
+
+function open(k, showLast){
+  var T=TESTS[k]; if(!T){ return closeApp(); }
+  document.body.classList.add('testing'); window.scrollTo(0,0);
+  document.getElementById('atitle').textContent='Тест '+T.n+' из 3';
+  var last=(load()[k]||[]).slice(-1)[0];
+  st={k:k,T:T,i:-1,ans:[],role:null,self:null};
+  if(showLast && last){ st.result=last; return renderResult(); }
+  renderIntro();
+}
+function closeApp(){ document.body.classList.remove('testing'); st=null; renderCards(); if(location.hash.indexOf('#t/')===0) history.replaceState(null,'',location.pathname+location.search+'#tests'); var el=document.getElementById('tests'); if(el) el.scrollIntoView(); }
+document.getElementById('aclose').onclick=closeApp;
+document.getElementById('aback').onclick=function(){
+  if(!st) return;
+  if(st.result){ return closeApp(); }
+  if(st.i>0){ st.i--; renderQ(); } else if(st.i===0){ st.T.intro?renderPre():renderIntro(); st.i=-1; } else { renderIntro(); }
+};
+function progress(){
+  var T=st.T, n=T.q.length, h='';
+  for(var i=0;i<n;i++){ h+='<i class="'+(i<st.i?'on':(i===st.i?'now':''))+'"></i>'; }
+  document.getElementById('aprog').innerHTML = st.i>=0 && !st.result ? h : '';
+}
+function renderIntro(){
+  var T=st.T; st.i=-1; st.result=null; progress();
+  document.getElementById('aback').disabled=true;
+  var last=(load()[T.slug]||[]).slice(-1)[0];
+  scr.innerHTML='<div class="fade" style="display:flex;flex-direction:column;flex:1"><div class="zone" style="margin-top:28px">Kaizen Track · точка А</div><h1>'+esc(T.title)+'</h1><p class="lead">'+esc(T.sub)+'</p>'+
+   '<div class="ifacts"><div><b>'+T.q.length+'</b><span>вопросов</span></div><div><b>'+(T.q.length>15?3:2)+'</b><span>минуты</span></div><div><b>0–100</b><span>индекс</span></div></div>'+
+   (last?'<p class="muted" style="font-size:14px">Последний замер '+fmtDate(last.t)+': <b class="gold">'+last.index+'</b>. Пройдите снова, чтобы сравнить.</p>':'<p class="muted" style="font-size:14px">Ответы остаются на Вашем устройстве. Результат сохранится как точка отсчёта с датой.</p>')+
+   '<div class="sp"></div><button class="btn main block" id="go">Начать</button>'+(last?'<button class="btn ghost block" style="margin-top:10px" id="see">Смотреть прошлый результат</button>':'')+'</div>';
+  document.getElementById('go').onclick=function(){ T.intro?renderPre():start(); };
+  if(last) document.getElementById('see').onclick=function(){ st.result=last; renderResult(); };
+}
+function renderPre(){
+  st.i=-1; progress(); document.getElementById('aback').disabled=false;
+  var h='<div class="fade"><div class="zone">Перед началом</div><div class="stmt" style="min-height:0">Как Вы оцениваете свою энергию на этой неделе?</div><p class="hint">1 — еле держусь, 10 — полон сил</p><div class="chips n10" id="selfc">';
+  for(var i=1;i<=10;i++) h+='<button data-v="'+i+'" class="'+(st.self===i?'sel':'')+'">'+i+'</button>';
+  h+='</div><div class="stmt" style="min-height:0;margin-top:28px;font-size:22px">Кто Вы сейчас?</div><div class="chips" id="rolec" style="margin-top:12px">';
+  ROLES.forEach(function(r,i){ h+='<button data-v="'+i+'" class="'+(st.role===i?'sel':'')+'">'+r+'</button>'; });
+  h+='</div><div class="sp" style="min-height:24px"></div><button class="btn main block" id="go" disabled style="opacity:.5">Дальше</button></div>';
+  scr.innerHTML=h;
+  function chk(){ var ok=st.self&&st.role!==null; var b=document.getElementById('go'); b.disabled=!ok; b.style.opacity=ok?1:.5; }
+  scr.querySelectorAll('#selfc button').forEach(function(b){ b.onclick=function(){ st.self=+b.dataset.v; scr.querySelectorAll('#selfc button').forEach(function(x){x.classList.toggle('sel',x===b);}); chk(); }; });
+  scr.querySelectorAll('#rolec button').forEach(function(b){ b.onclick=function(){ st.role=+b.dataset.v; scr.querySelectorAll('#rolec button').forEach(function(x){x.classList.toggle('sel',x===b);}); chk(); }; });
+  chk(); document.getElementById('go').onclick=start;
+}
+function start(){ st.i=0; renderQ(); }
+function renderQ(){
+  var T=st.T, q=T.q[st.i], g=T.groups.filter(function(x){return x.id===q[0];})[0];
+  progress(); document.getElementById('aback').disabled=false;
+  var vals=T.scale.map(function(_,i){ return T.up? i+1 : i; });
+  var h='<div class="fade"><div class="zone">'+(st.i+1)+' / '+T.q.length+'</div><div class="stmt">'+esc(qText(T,st.i))+'</div><p class="hint">'+esc(T.hint)+'</p><div class="answers">';
+  T.scale.forEach(function(lab,i){ var v=vals[i]; h+='<button data-v="'+v+'" class="'+(st.ans[st.i]===v?'sel':'')+'"><i>'+(T.up?v:v)+'</i>'+lab+'</button>'; });
+  scr.innerHTML=h+'</div></div>';
+  scr.querySelectorAll('.answers button').forEach(function(b){ b.onclick=function(){
+    st.ans[st.i]=+b.dataset.v; b.classList.add('sel');
+    setTimeout(function(){ if(st.i<T.q.length-1){ st.i++; renderQ(); } else finish(); },170);
+  }; });
+}
+function finish(){
+  var T=st.T, sums={}, cnt={}, all=0;
+  T.groups.forEach(function(g){ sums[g.id]=0; cnt[g.id]=0; });
+  T.q.forEach(function(q,i){ var s=scoreOf(T,st.ans[i]); sums[q[0]]+=s; cnt[q[0]]++; all+=s; });
+  var groups={}; T.groups.forEach(function(g){ groups[g.id]=Math.round(sums[g.id]/cnt[g.id]*100); });
+  var index=Math.round(all/T.q.length*100);
+  var weak=T.groups.slice().sort(function(a,b){ return groups[a.id]-groups[b.id]; })[0];
+  // главные «узкие места»: вопросы с худшим баллом
+  var idx=T.q.map(function(_,i){return i;}).sort(function(a,b){ return scoreOf(T,st.ans[a])-scoreOf(T,st.ans[b]); });
+  var worst=idx.filter(function(i){ return scoreOf(T,st.ans[i])<=0.34; }).slice(0,3);
+  var rec={t:Date.now(),index:index,groups:groups,weak:weak.id,type:weak.type,worst:worst,ans:st.ans.slice(),src:SRC};
+  if(st.self) rec.self=st.self; if(st.role!==null) rec.role=st.role;
+  var d=load(); (d[T.slug]=d[T.slug]||[]).push(rec); if(d[T.slug].length>10) d[T.slug].shift(); save(d);
+  st.result=rec; renderResult();
+}
+function levelOf(T,idx){ for(var i=0;i<T.levels.length;i++){ if(idx>=T.levels[i][0]) return T.levels[i]; } return T.levels[T.levels.length-1]; }
+function ring(v){ var r=56,c=2*Math.PI*r,col=v>=70?'#8FB59A':(v>=45?'#D6A25E':'#D07A5E');
+  return '<div class="ring"><svg viewBox="0 0 132 132"><circle cx="66" cy="66" r="'+r+'" fill="none" stroke="rgba(246,242,232,.12)" stroke-width="10"/><circle cx="66" cy="66" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="10" stroke-linecap="round" stroke-dasharray="'+(c*v/100)+' '+c+'"/></svg><b>'+v+'<small>из 100</small></b></div>'; }
+function radar(T,groups){
+  var n=T.groups.length, cx=170, cy=150, R=104, pts=[], grid='', lab='';
+  for(var k=1;k<=4;k++){ var p=[]; for(var i=0;i<n;i++){ var a=-Math.PI/2+i*2*Math.PI/n; p.push((cx+Math.cos(a)*R*k/4).toFixed(1)+','+(cy+Math.sin(a)*R*k/4).toFixed(1)); } grid+='<polygon points="'+p.join(' ')+'" fill="none" stroke="rgba(246,242,232,.12)"/>'; }
+  T.groups.forEach(function(g,i){ var a=-Math.PI/2+i*2*Math.PI/n, v=Math.max(groups[g.id],4)/100;
+    pts.push((cx+Math.cos(a)*R*v).toFixed(1)+','+(cy+Math.sin(a)*R*v).toFixed(1));
+    var lx=cx+Math.cos(a)*(R+22), ly=cy+Math.sin(a)*(R+18), anc=Math.abs(Math.cos(a))<.2?'middle':(Math.cos(a)>0?'start':'end');
+    lab+='<text x="'+lx.toFixed(1)+'" y="'+(ly+4).toFixed(1)+'" text-anchor="'+anc+'" font-family="Manrope" font-weight="700" font-size="12.5" fill="#F6F2E8">'+esc(g.name)+'</text><text x="'+lx.toFixed(1)+'" y="'+(ly+19).toFixed(1)+'" text-anchor="'+anc+'" font-family="Inter" font-size="11.5" fill="rgba(246,242,232,.6)">'+groups[g.id]+'</text>';
+  });
+  return '<svg class="radar" viewBox="-50 -4 440 318">'+grid+'<polygon points="'+pts.join(' ')+'" fill="rgba(214,162,94,.28)" stroke="#D6A25E" stroke-width="2"/>'+lab+'</svg>';
+}
+function renderResult(){
+  var T=st.T, r=st.result, lv=levelOf(T,r.index), weak=T.groups.filter(function(g){return g.id===r.weak;})[0];
+  progress(); document.getElementById('aback').disabled=false;
+  var hist=load()[T.slug]||[], prev=null;
+  for(var i=hist.length-1;i>=0;i--){ if(hist[i].t<r.t-60000){ prev=hist[i]; break; } }
+  var phrase=(weak.phraseAlt && r.role>=2)?weak.phraseAlt:weak.phrase;
+  var h='<div class="fade"><div class="zone" style="margin-top:24px">'+esc(T.title)+' · '+fmtDate(r.t)+'</div>'+
+   '<div class="res-head">'+ring(r.index)+'<div class="lvl">'+esc(lv[1])+'<small>'+esc(lv[2])+'</small></div></div>';
+  h+='<div class="rcard"><div class="q">'+(T.up?'Самая слабая сфера':'Главное слабое место')+' · '+esc(weak.name)+'</div><h2>«'+esc(weak.type)+'»</h2><p class="muted">'+esc(phrase)+'</p></div>';
+  // разбивка
+  h+='<div class="rcard"><div class="q">'+(T.up?'Карта по сферам':'По зонам')+'</div>';
+  if(T.slug==='karta') h+=radar(T,r.groups);
+  h+='<div class="bars">';
+  T.groups.slice().sort(function(a,b){return r.groups[a.id]-r.groups[b.id];}).forEach(function(g){
+    h+='<div class="bar'+(g.id===r.weak?' weak':'')+'"><span class="n">'+esc(g.name)+'</span><span class="v">'+r.groups[g.id]+'</span><div class="t"><i style="width:'+Math.max(r.groups[g.id],3)+'%"></i></div>'+(T.slug!=='karta'?'<span class="d">'+esc(g.type)+'</span>':'')+'</div>';
+  });
+  h+='</div><p class="small" style="text-align:left;margin-top:12px">'+(T.up?'100 значит сфера полностью Вас устраивает.':'100 значит утечек нет. Чем ниже балл, тем больше сил уходит через эту зону.')+'</p></div>';
+  // шаги
+  var steps=[];
+  if(T.slug==='energiya'){
+    (r.worst||[]).forEach(function(i){ steps.push({w:T.q[i][1],s:T.q[i][2]}); });
+    if(!steps.length){ T.q.forEach(function(q,i){ if(q[0]===r.weak && steps.length<3) steps.push({w:q[1],s:q[2]}); }); }
+  } else { weak.steps.forEach(function(s){ steps.push({s:s}); }); }
+  h+='<div class="rcard"><div class="q">'+(T.slug==='energiya'?'Три главные утечки и шаг на неделю':'Три шага на эту неделю')+'</div><ol class="steps">';
+  steps.forEach(function(x){ h+='<li>'+(x.w?'<small>'+esc(x.w)+'</small>':'')+esc(x.s)+'</li>'; });
+  h+='</ol></div>';
+  // сравнение
+  if(prev){
+    h+='<div class="rcard"><div class="q">Было → стало · с '+fmtDate(prev.t)+'</div><div class="cmp"><b>Индекс</b><span class="muted">'+prev.index+'</span><b class="'+(r.index>=prev.index?'up':'dn')+'">'+r.index+'</b>';
+    T.groups.forEach(function(g){ var a=prev.groups[g.id], b=r.groups[g.id]; h+='<span>'+esc(g.name)+'</span><span class="muted">'+a+'</span><span class="'+(b>=a?'up':'dn')+'">'+b+'</span>'; });
+    h+='</div></div>';
+  }
+  // точка А и следующий тест
+  var d=load(), rest=ORDER.filter(function(k){ return k!==T.slug && !(d[k]&&d[k].length); });
+  h+='<div class="rcard"><div class="q">Точка отсчёта сохранена</div><p class="muted">Результат записан на этом устройстве с датой. Пройдите тест снова через 12 недель, примерно '+fmtDate(r.t+84*864e5)+', и увидите рост в цифрах.</p>';
+  if(rest.length){ h+='<div class="next" style="margin-top:14px">'; rest.forEach(function(k){ h+='<a href="#t/'+k+'">'+esc(TESTS[k].title)+'<span>'+TESTS[k].meta+' →</span></a>'; }); h+='</div>'; }
+  else { h+='<p style="margin-top:10px"><b class="gold">Все три теста пройдены: Ваша точка А собрана.</b></p>'; }
+  h+='</div>';
+  // CTA
+  h+='<div class="cta"><a class="btn main block" id="tgb" target="_blank" rel="noopener">Получить план на 4 недели в Telegram</a>'+
+     '<button class="btn ghost block" id="card">Сохранить карточку для сторис</button>'+
+     '<button class="btn ghost block" id="share">Отправить тест другу</button>'+
+     '<a class="btn ghost block" href="#price" id="club">Узнать про клуб Kaizen Track</a></div>'+
+     '<p class="small" style="margin-top:14px">В Telegram придёт план закрытия «'+esc(weak.type)+'» и напоминание о повторном замере.</p></div>';
+  scr.innerHTML=h;
+  var payload='kt_'+T.slug.slice(0,2)+'_'+String(r.src||'site').replace(/[^a-zA-Z0-9]/g,'').slice(0,20)+'_'+r.index+'_'+r.weak;
+  document.getElementById('tgb').href = LINKS.tgBot ? LINKS.tgBot+'?start='+encodeURIComponent(payload).slice(0,64) : LINKS.channel;
+  document.getElementById('club').onclick=function(e){ e.preventDefault(); closeApp(); setTimeout(function(){ document.getElementById('price').scrollIntoView(); },30); };
+  document.getElementById('share').onclick=function(){
+    var url=location.origin+location.pathname+'?src=friend#t/'+T.slug, text='Тест «'+T.title+'» от Kaizen Track. 3 минуты, попробуйте:';
+    if(navigator.share){ navigator.share({title:T.title,text:text,url:url}).catch(function(){}); }
+    else { try{ navigator.clipboard.writeText(text+' '+url); this.textContent='Ссылка скопирована'; }catch(e){ prompt('Скопируйте ссылку',url); } }
+  };
+  document.getElementById('card').onclick=function(){ storyCard(T,r,weak,lv); };
+}
+
+/* ===== Карточка для сторис 1080×1920 ===== */
+function storyCard(T,r,weak,lv){
+  var c=document.createElement('canvas'); c.width=1080; c.height=1920; var x=c.getContext('2d');
+  var g=x.createLinearGradient(0,0,0,1920); g.addColorStop(0,'#0B1E33'); g.addColorStop(1,'#173351'); x.fillStyle=g; x.fillRect(0,0,1080,1920);
+  x.fillStyle='rgba(214,162,94,.35)'; x.beginPath(); x.moveTo(0,1920); x.lineTo(260,1560); x.lineTo(420,1690); x.lineTo(640,1420); x.lineTo(820,1600); x.lineTo(1080,1380); x.lineTo(1080,1920); x.fill();
+  x.fillStyle='#D6A25E'; x.font='700 40px Manrope, sans-serif'; x.fillText('KAIZEN TRACK · ТОЧКА А',90,170);
+  x.fillStyle='#F6F2E8'; x.font='800 76px Manrope, sans-serif'; wrapText(x,T.title,90,300,900,88);
+  var cx=540, cy=820, R=230; x.lineWidth=36; x.strokeStyle='rgba(246,242,232,.12)'; x.beginPath(); x.arc(cx,cy,R,0,Math.PI*2); x.stroke();
+  x.strokeStyle=r.index>=70?'#8FB59A':(r.index>=45?'#D6A25E':'#D07A5E'); x.lineCap='round'; x.beginPath(); x.arc(cx,cy,R,-Math.PI/2,-Math.PI/2+Math.PI*2*r.index/100); x.stroke();
+  x.fillStyle='#F6F2E8'; x.textAlign='center'; x.font='800 200px Manrope, sans-serif'; x.fillText(r.index,cx,cy+60); x.font='500 40px Inter, sans-serif'; x.fillStyle='rgba(246,242,232,.6)'; x.fillText('из 100',cx,cy+130);
+  x.fillStyle='#D6A25E'; x.font='700 44px Manrope, sans-serif'; x.fillText(lv[1],cx,1150);
+  x.fillStyle='#F6F2E8'; x.font='800 84px Manrope, sans-serif'; x.fillText('«'+weak.type+'»',cx,1270);
+  x.fillStyle='rgba(246,242,232,.7)'; x.font='500 40px Inter, sans-serif'; x.fillText('Узнайте свой результат за 3 минуты',cx,1780); x.fillStyle='#D6A25E'; x.font='700 44px Manrope, sans-serif'; x.fillText('@atsyrulnikov',cx,1845);
+  c.toBlob(function(b){
+    var f=new File([b],'kaizen-'+T.slug+'.png',{type:'image/png'});
+    if(navigator.canShare && navigator.canShare({files:[f]})){ navigator.share({files:[f]}).catch(function(){}); }
+    else { var a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=f.name; document.body.appendChild(a); a.click(); a.remove(); }
+  },'image/png');
+}
+function wrapText(x,t,X,Y,W,L){ var w=t.split(' '),line=''; for(var i=0;i<w.length;i++){ var tt=line+w[i]+' '; if(x.measureText(tt).width>W&&line){ x.fillText(line,X,Y); line=w[i]+' '; Y+=L; } else line=tt; } x.fillText(line,X,Y); }
+
+/* ===== Маршрутизация ===== */
+function route(){
+  var m=location.hash.match(/^#t\/(\w+)/);
+  if(m && TESTS[m[1]]){ open(m[1], true); }
+  else if(document.body.classList.contains('testing')){ document.body.classList.remove('testing'); st=null; renderCards(); }
+}
+window.addEventListener('hashchange',route);
+renderCards(); route();
+</script>
+</body>
+</html>
