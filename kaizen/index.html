@@ -563,7 +563,7 @@ function renderCards(){
     if(last) done++;
     html+='<div class="card tcard'+(last?' has':'')+'"><div class="num">0'+T.n+'</div><h3>'+esc(T.title)+'</h3><p class="muted">'+esc(T.sub)+'</p><div class="meta">'+T.meta+'</div><div class="grow"></div>'+
       (last?'<div class="done"><b>'+last.index+'</b><span class="muted">из 100 · '+esc(last.type)+'</span></div>':'')+
-      '<a class="btn '+(last?'ghost':'main')+' block" href="#t/'+k+'">'+(last?'Смотреть результат':'Пройти тест')+'</a></div>';
+      '<a class="btn '+(last?'ghost':'main')+' block" href="#test-'+k+'">'+(last?'Смотреть результат':'Пройти тест')+'</a></div>';
   });
   document.getElementById('tcards').innerHTML=html;
   var dots=document.querySelectorAll('#pdots i'); ORDER.forEach(function(k,i){ dots[i].className=(d[k]&&d[k].length)?'on':''; });
@@ -589,7 +589,7 @@ function open(k, showLast){
   if(showLast && last){ st.result=last; return renderResult(); }
   renderIntro();
 }
-function closeApp(){ document.body.classList.remove('testing'); st=null; renderCards(); if(location.hash.indexOf('#t/')===0) history.replaceState(null,'',location.pathname+location.search+'#tests'); var el=document.getElementById('tests'); if(el) el.scrollIntoView(); }
+function closeApp(){ document.body.classList.remove('testing'); st=null; renderCards(); if(location.hash.indexOf('#test-')===0) history.replaceState(null,'',location.pathname+location.search+'#tests'); var el=document.getElementById('tests'); if(el) el.scrollIntoView(); }
 document.getElementById('aclose').onclick=closeApp;
 document.getElementById('aback').onclick=function(){
   if(!st) return;
@@ -701,7 +701,7 @@ function renderResult(){
   // точка А и следующий тест
   var d=load(), rest=ORDER.filter(function(k){ return k!==T.slug && !(d[k]&&d[k].length); });
   h+='<div class="rcard"><div class="q">Точка отсчёта сохранена</div><p class="muted">Результат записан на этом устройстве с датой. Пройдите тест снова через 12 недель, примерно '+fmtDate(r.t+84*864e5)+', и увидите рост в цифрах.</p>';
-  if(rest.length){ h+='<div class="next" style="margin-top:14px">'; rest.forEach(function(k){ h+='<a href="#t/'+k+'">'+esc(TESTS[k].title)+'<span>'+TESTS[k].meta+' →</span></a>'; }); h+='</div>'; }
+  if(rest.length){ h+='<div class="next" style="margin-top:14px">'; rest.forEach(function(k){ h+='<a href="#test-'+k+'">'+esc(TESTS[k].title)+'<span>'+TESTS[k].meta+' →</span></a>'; }); h+='</div>'; }
   else { h+='<p style="margin-top:10px"><b class="gold">Все три теста пройдены: Ваша точка А собрана.</b></p>'; }
   h+='</div>';
   // CTA
@@ -715,7 +715,7 @@ function renderResult(){
   document.getElementById('tgb').href = LINKS.tgBot ? LINKS.tgBot+'?start='+encodeURIComponent(payload).slice(0,64) : LINKS.channel;
   document.getElementById('club').onclick=function(e){ e.preventDefault(); closeApp(); setTimeout(function(){ document.getElementById('price').scrollIntoView(); },30); };
   document.getElementById('share').onclick=function(){
-    var url=location.origin+location.pathname+'?src=friend#t/'+T.slug, text='Тест «'+T.title+'» от Kaizen Track. 3 минуты, попробуйте:';
+    var url=location.origin+location.pathname+'?src=friend#test-'+T.slug, text='Тест «'+T.title+'» от Kaizen Track. 3 минуты, попробуйте:';
     if(navigator.share){ navigator.share({title:T.title,text:text,url:url}).catch(function(){}); }
     else { try{ navigator.clipboard.writeText(text+' '+url); this.textContent='Ссылка скопирована'; }catch(e){ prompt('Скопируйте ссылку',url); } }
   };
@@ -745,7 +745,7 @@ function wrapText(x,t,X,Y,W,L){ var w=t.split(' '),line=''; for(var i=0;i<w.leng
 
 /* ===== Маршрутизация ===== */
 function route(){
-  var m=location.hash.match(/^#t\/(\w+)/);
+  var m=location.hash.match(/^#test-(\w+)/);
   if(m && TESTS[m[1]]){ open(m[1], true); }
   else if(document.body.classList.contains('testing')){ document.body.classList.remove('testing'); st=null; renderCards(); }
 }
